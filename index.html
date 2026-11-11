@@ -41,13 +41,13 @@
             sans: ['"Noto Sans TC"', '"Plus Jakarta Sans"', 'sans-serif'],
           },
           animation: {
-            'glow-pulse': 'glowPulse 2.5s infinite ease-in-out',
-            'fade-slide': 'fadeSlideUp 0.4s ease-out forwards',
+            'glow-pulse': 'glowPulse 3s infinite ease-in-out',
+            'fade-slide': 'fadeSlideUp 0.35s ease-out forwards',
           },
           keyframes: {
             glowPulse: {
-              '0%, 100%': { boxShadow: '0 0 15px rgba(251, 191, 36, 0.4), inset 0 0 15px rgba(251, 191, 36, 0.2)' },
-              '50%': { boxShadow: '0 0 30px rgba(245, 158, 11, 0.8), inset 0 0 20px rgba(245, 158, 11, 0.4)' },
+              '0%, 100%': { filter: 'drop-shadow(0 0 15px rgba(251, 191, 36, 0.4))' },
+              '50%': { filter: 'drop-shadow(0 0 35px rgba(245, 158, 11, 0.9))' },
             },
             fadeSlideUp: {
               '0%': { opacity: '0', transform: 'translateY(16px)' },
@@ -62,8 +62,8 @@
   <style>
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
     }
     ::-webkit-scrollbar-track {
       background: #f1f5f9;
@@ -82,7 +82,7 @@
         background: white !important;
         color: #111827 !important;
       }
-      .no-print, header, .quick-dock, .modal-backdrop, button, .action-bar {
+      .no-print, header, .modal-backdrop, button, nav {
         display: none !important;
       }
       .print-header {
@@ -95,16 +95,10 @@
         border: 1px solid #d1d5db !important;
         margin-bottom: 1.5rem !important;
       }
-      .card-content {
-        display: block !important;
-      }
-      .print-badge {
-        display: inline-block !important;
-      }
     }
   </style>
 </head>
-<body class="bg-[#f3f6f4] text-gray-800 font-sans antialiased min-h-screen flex flex-col selection:bg-amberwood-400 selection:text-forest-950">
+<body class="bg-[#f2f5f3] text-gray-800 font-sans antialiased min-h-screen flex flex-col selection:bg-amberwood-400 selection:text-forest-950">
 
   <!-- Toast Notification System -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-28 opacity-0 transition-all duration-300 bg-gray-900/95 backdrop-blur-md text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/10">
@@ -120,44 +114,43 @@
   <!-- Print-Only Guidebook Header -->
   <div class="hidden print-header p-6 border-b-2 border-forest-900 mb-6">
     <h1 class="text-3xl font-extrabold text-forest-950">阿里山日出巨木・三天兩夜 (1/28 - 1/30) 旗艦漫遊手冊</h1>
-    <p class="text-sm text-gray-600 mt-1">中和啟程 ✕ 阿里山閣大飯店 ✕ 巨木群純下坡巡禮 ✕ 小笠原 360° 晨曦破曉 ✕ 奮起湖老街 ✕ 隙頂茶園</p>
-    <div class="mt-2 text-xs text-gray-500">阿里山閣櫃檯專線：05-2679611 ｜ 阿里山祝山觀日小火車提前於乘車前日 16:30 購票</div>
+    <p class="text-sm text-gray-600 mt-1">中和啟程 ✕ 阿里山閣大飯店 ✕ 巨木群純下坡巡禮 ✕ 小笠原 360° 晨曦破曉 ✕ 親子抗寒必備</p>
+    <div class="mt-2 text-xs text-gray-500">阿里山閣專線：05-2679611 ｜ 祝山線觀日小火車提前於乘車前日 16:30 購票</div>
   </div>
 
   <!-- MAIN APP WRAPPER -->
   <div class="flex-grow flex flex-col">
 
-    <!-- HERO SECTION WITH IMMERSIVE ALISHAN SUNRISE BANNER -->
-    <header class="relative bg-forest-950 text-white overflow-hidden shadow-2xl">
-      <!-- High Resolution Sunrise & Clouds Background -->
-      <div class="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=80" 
-          alt="阿里山日出雲海" 
-          class="w-full h-full object-cover object-center scale-105 transform opacity-35 filter brightness-90 saturate-125"
-          onerror="this.src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80'"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/70 to-transparent"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-forest-950/90 via-transparent to-forest-950/80"></div>
-      </div>
+    <!-- HERO SECTION WITH ANIMATED SUNRISE & CLOUDS CANVAS -->
+    <header class="relative bg-gradient-to-b from-[#081a10] via-[#0d2b1a] to-forest-950 text-white overflow-hidden shadow-2xl min-h-[500px]">
+      
+      <!-- Interactive Sunrise & Mountain Ridges Canvas -->
+      <canvas id="sunriseCanvas" class="absolute inset-0 w-full h-full z-0 block"></canvas>
+      
+      <!-- Soft Gradient Overlay to ensure text readability -->
+      <div class="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-forest-950/90 via-transparent to-forest-950/80 z-10 pointer-events-none"></div>
 
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 relative z-10">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-10 relative z-20">
         <!-- Top Nav Tag & Action Buttons -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-amberwood-400 text-xs font-bold tracking-wider backdrop-blur-md uppercase">
             <span class="w-2 h-2 rounded-full bg-amberwood-400 animate-ping inline-block mr-1"></span>
-            專屬排程：1/28 (三) ～ 1/30 (五) 深度三日行
+            1/28 (三) ～ 1/30 (五) 寒假親子深度漫遊
           </div>
 
           <!-- Utility Action Buttons -->
           <div class="flex flex-wrap items-center gap-2 no-print">
+            <button onclick="openModal('checklistModal')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-extrabold text-xs tracking-wide shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2 active:scale-95">
+              <i class="fa-solid fa-clipboard-check text-sm text-amberwood-300"></i> 親子裝備清單 (<span id="btnChecklistProgress">0/16</span>)
+            </button>
             <button onclick="sharePlan()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amberwood-400 to-amberwood-500 hover:from-amberwood-500 hover:to-amberwood-600 text-forest-950 font-extrabold text-xs tracking-wide shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2 active:scale-95">
-              <i class="fa-solid fa-share-nodes text-sm"></i> 複製分享連結給好友
+              <i class="fa-solid fa-share-nodes text-sm"></i> 分享行程給好友
             </button>
             <button onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs backdrop-blur-md transition-all flex items-center gap-2 active:scale-95">
-              <i class="fa-solid fa-print"></i> 列印手冊 / PDF
+              <i class="fa-solid fa-print"></i> 列印手冊
             </button>
-            <button onclick="resetDefaultPlan()" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-emerald-200 text-xs" title="重設為預設最佳規劃">
+            <button onclick="resetDefaultPlan()" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-emerald-200 text-xs" title="重設為預設規劃">
               <i class="fa-solid fa-rotate-left"></i>
             </button>
           </div>
@@ -165,12 +158,12 @@
 
         <!-- Main Title & Lead Text -->
         <div class="max-w-3xl">
-          <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight sm:leading-none text-white drop-shadow-md">
+          <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight sm:leading-none text-white drop-shadow-lg">
             中和出發 <span class="text-amberwood-400">✕</span> 阿里山閣<br class="hidden sm:inline" />
-            <span class="bg-gradient-to-r from-amberwood-300 via-amberwood-400 to-emerald-200 bg-clip-text text-transparent">日出巨木・三天兩夜旗艦漫遊</span>
+            <span class="bg-gradient-to-r from-amberwood-300 via-amberwood-400 to-emerald-200 bg-clip-text text-transparent">日出巨木・寒假三天兩夜旗艦漫遊</span>
           </h1>
-          <p class="mt-4 text-sm sm:text-base text-emerald-100/85 leading-relaxed font-normal">
-            三天兩夜從容自駕節奏：1/28 漫遊奮起湖抵達森林深處「阿里山閣大飯店」；1/29 迎小笠原 360° 玉山破曉金光，純下坡走訪香林神木與水山巨木秘境；1/30 漫步頂石棹步道茶園與二延平雲海，順路賦歸。
+          <p class="mt-4 text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal">
+            針對國中與國小孩子設計的從容步調：入住管制區深處「阿里山閣大飯店」，1/29 迎小笠原 360° 玉山破曉金光，純下坡走訪香林神木與水山巨木秘境，備妥保暖裝備與熱水，享受冬日山林之美。
           </p>
         </div>
 
@@ -179,10 +172,10 @@
           <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/15 flex flex-col justify-between">
             <div>
               <div class="text-[11px] font-semibold text-emerald-200/80 flex items-center gap-1.5">
-                <i class="fa-solid fa-temperature-arrow-down text-cyan-300"></i> 1月冬季氣溫預報
+                <i class="fa-solid fa-temperature-arrow-down text-cyan-300"></i> 1月下旬氣溫預報
               </div>
               <div class="text-base sm:text-lg font-extrabold text-white mt-1">清晨 0°C ~ 6°C</div>
-              <div class="text-[10px] text-emerald-300/80 mt-0.5">寒冬清晨嚴寒，羽絨衣手套必備</div>
+              <div class="text-[10px] text-emerald-300/80 mt-0.5">高山體感逼近零度，毛帽手套必備</div>
             </div>
             <a href="https://www.cwa.gov.tw/V8/C/L/NatForest/NatForest.html?PID=E001" target="_blank" rel="noopener noreferrer" class="mt-2 text-[11px] text-cyan-300 hover:text-white font-bold flex items-center gap-1">
               氣象署一週天氣預報 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
@@ -205,7 +198,7 @@
           <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/15 flex flex-col justify-between">
             <div>
               <div class="text-[11px] font-semibold text-emerald-200/80 flex items-center gap-1.5">
-                <i class="fa-solid fa-train text-emerald-300"></i> 林鐵祝山線觀日車票
+                <i class="fa-solid fa-train text-emerald-300"></i> 祝山線觀日車票
               </div>
               <div class="text-base sm:text-lg font-extrabold text-white mt-1">沼平 ➔ 祝山</div>
               <div class="text-[10px] text-emerald-300/80 mt-0.5">建議前一日先在車站或網路取票</div>
@@ -229,12 +222,20 @@
           </div>
         </div>
 
-        <!-- 4 QUICK MODAL DOCK BUTTONS -->
+        <!-- 5 QUICK MODAL DOCK BUTTONS -->
         <div class="mt-8 pt-6 border-t border-white/15 no-print">
           <div class="text-xs font-bold text-amberwood-300/90 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <i class="fa-solid fa-bolt-lightning text-amberwood-400"></i> 核心必備專屬互動攻略面板 (點擊立即開啟)
+            <i class="fa-solid fa-compass text-amberwood-400"></i> 快速功能與互動指南 (點擊直接開啟)
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <button onclick="openModal('checklistModal')" class="p-3.5 rounded-2xl bg-white/10 hover:bg-emerald-600/30 border border-emerald-400/50 text-left transition-all backdrop-blur-md group hover:scale-[1.02] shadow-sm active:scale-95 col-span-2 sm:col-span-1">
+              <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-sm mb-2 group-hover:bg-emerald-500 group-hover:text-white transition">
+                <i class="fa-solid fa-clipboard-check"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-white group-hover:text-amberwood-300 transition">🎒 親子抗寒清單</h4>
+              <p class="text-[11px] text-emerald-200/80 mt-0.5">手機自動保存打勾 ➔</p>
+            </button>
+
             <button onclick="openModal('shuttleModal')" class="p-3.5 rounded-2xl bg-white/10 hover:bg-emerald-600/30 border border-emerald-400/40 text-left transition-all backdrop-blur-md group hover:scale-[1.02] shadow-sm active:scale-95">
               <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-sm mb-2 group-hover:bg-emerald-500 group-hover:text-white transition">
                 <i class="fa-solid fa-van-shuttle"></i>
@@ -272,7 +273,7 @@
     </header>
 
     <!-- STICKY ACTION & DAY SELECTOR BAR -->
-    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-lg border-b border-gray-200/80 shadow-sm no-print">
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-lg border-b border-gray-200/80 shadow-sm no-print">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
         <!-- Day Tabs -->
         <div class="flex items-center gap-1 p-1 bg-gray-100 rounded-2xl border border-gray-200/70 overflow-x-auto max-w-full">
@@ -292,7 +293,7 @@
 
         <!-- Schedule Utilities -->
         <div class="flex items-center gap-2">
-          <button onclick="autoRecalculateTimeline()" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95" title="根據每個點設定的停留分鐘數，自動依序推算整天的抵達時間">
+          <button onclick="autoRecalculateTimeline()" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95" title="根據停留時長，自動依序推算抵達時間">
             <i class="fa-solid fa-clock-rotate-left text-forest-700"></i>
             <span class="hidden sm:inline">依停留時長</span>順延時間
           </button>
@@ -310,7 +311,76 @@
 
   </div>
 
-  <!-- ==================== 4 DETAILED INTERACTIVE MODALS ==================== -->
+  <!-- ==================== 5 INTERACTIVE MODALS ==================== -->
+
+  <!-- MODAL 0: PARENT-CHILD PACKING & PREPARATION CHECKLIST (具有 LocalStorage 永久紀錄) -->
+  <div id="checklistModal" class="modal-backdrop fixed inset-0 z-50 bg-forest-950/75 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-gray-100 animate-fade-slide flex flex-col">
+      <div class="sticky top-0 bg-white border-b border-gray-100 p-5 flex items-center justify-between z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-clipboard-check"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-forest-950">寒假親子抗寒裝備清單 (1/28 - 1/30)</h3>
+            <p class="text-xs text-gray-500">國中/國小學童適用 ✕ 永久記錄在個人手機中（關閉不遺失）</p>
+          </div>
+        </div>
+        <button onclick="closeModal('checklistModal')" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Checklist Body -->
+      <div class="p-6 space-y-6 text-sm text-gray-700 flex-grow">
+        <!-- Progress Bar Card -->
+        <div class="bg-emerald-50 border border-emerald-200/80 rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-forest-950 flex items-center gap-1.5">
+              <i class="fa-solid fa-spinner text-emerald-600"></i> 行李準備進度：
+            </span>
+            <span id="checklistPercentage" class="text-xs font-black text-emerald-800 font-mono">0% (0/16)</span>
+          </div>
+          <div class="w-full bg-emerald-200/60 rounded-full h-2.5 overflow-hidden">
+            <div id="checklistBar" class="bg-gradient-to-r from-emerald-600 to-amberwood-500 h-2.5 rounded-full transition-all duration-300 w-0"></div>
+          </div>
+          <p class="text-[11px] text-emerald-800/90 mt-2">
+            💡 <strong>紀錄提示：</strong>打勾後會即時存於手機瀏覽器中，換日、重新整理或關掉網頁都不會清空！
+          </p>
+        </div>
+
+        <!-- Checklist Items Render Container -->
+        <div id="checklistContainer" class="space-y-5">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+        <!-- Travelogue Reference Card -->
+        <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 text-xs space-y-1.5">
+          <div class="font-bold text-purple-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-book-bookmark text-purple-600"></i> 健行筆記 & 山友親子防寒經驗整理：
+          </div>
+          <p class="text-purple-800 leading-relaxed">
+            1. <strong>嚴禁純棉內衣</strong>：小學生健行跑跳出汗後純棉衣物難乾，在 3°C 冷風下極易引發失溫或著涼，底層務必選排汗發熱衣。<br>
+            2. <strong>手電筒取代手機</strong>：高山低溫手機耗電速度是平地 3 倍，清晨摸黑走路讓孩子自己握著手電筒照路更安全且具成就感。<br>
+            3. <strong>保溫瓶隨身熱水</strong>：小笠原觀景台吹冷風等待 30 分鐘，喝上一口溫熱水能大幅緩解寒顫與咳嗽。
+          </p>
+          <a href="https://hiking.biji.co/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-purple-700 font-bold hover:underline pt-1">
+            閱讀健行筆記：親子高山防寒與安全指引 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer Reset -->
+      <div class="sticky bottom-0 bg-white border-t border-gray-100 p-4 px-6 flex items-center justify-between z-10">
+        <button onclick="resetChecklist()" class="text-xs text-gray-500 hover:text-red-600 font-bold flex items-center gap-1">
+          <i class="fa-solid fa-rotate-left"></i> 清除重設清單
+        </button>
+        <button onclick="closeModal('checklistModal')" class="px-5 py-2 bg-forest-900 hover:bg-forest-950 text-white font-bold rounded-xl text-xs shadow-md">
+          完成確認
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL 1: SHUTTLE BUS (接駁車專屬時刻表) -->
   <div id="shuttleModal" class="modal-backdrop fixed inset-0 z-50 bg-forest-950/70 backdrop-blur-md hidden flex items-center justify-center p-4">
@@ -331,25 +401,23 @@
       </div>
 
       <div class="p-6 space-y-6 text-sm text-gray-700">
-        <!-- Call Out Box -->
         <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
-            <span class="text-xs font-bold text-emerald-900 block">停車指示：</span>
-            <span class="text-xs text-emerald-800">自用車請停「阿里山遊客中心大停車場」，攜帶過夜行李在遊客中心正門候車處等候。</span>
+            <span class="text-xs font-bold text-emerald-900 block">停車指引：</span>
+            <span class="text-xs text-emerald-800">自用車停放於「遊客中心大停車場」，攜過夜行李在遊客中心前候車。</span>
           </div>
           <a href="tel:052679611" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm">
             <i class="fa-solid fa-phone"></i> 撥打櫃檯 (05-2679611)
           </a>
         </div>
 
-        <!-- Section A: Check-in Shuttles -->
         <div>
           <div class="flex items-center gap-2 mb-3">
             <span class="px-2.5 py-1 rounded-md bg-emerald-800 text-white text-xs font-extrabold">下午進房接駁</span>
             <span class="text-xs font-bold text-gray-600">遊客中心 ➔ 飯店門口</span>
           </div>
           <p class="text-xs text-gray-500 mb-2">服務時段為 <strong>12:30 至 17:00</strong>，每 30 分鐘一班固定整點與半點發車：</p>
-          <div class="grid grid-cols-5 sm:grid-cols-5 gap-2 text-center font-mono font-bold text-xs">
+          <div class="grid grid-cols-5 gap-2 text-center font-mono font-bold text-xs">
             <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">12:30</div>
             <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">13:00</div>
             <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">13:30</div>
@@ -363,14 +431,13 @@
           </div>
         </div>
 
-        <!-- Section B: Checkout Shuttles -->
         <div>
           <div class="flex items-center gap-2 mb-3">
             <span class="px-2.5 py-1 rounded-md bg-forest-900 text-white text-xs font-extrabold">上午退房接駁</span>
             <span class="text-xs font-bold text-gray-600">飯店正門 ➔ 遊客中心停車場</span>
           </div>
           <p class="text-xs text-gray-500 mb-2">上午固定 8 個班次，請提前 5 分鐘於飯店大廳候車：</p>
-          <div class="grid grid-cols-4 sm:grid-cols-4 gap-2 text-center font-mono font-bold text-xs">
+          <div class="grid grid-cols-4 gap-2 text-center font-mono font-bold text-xs">
             <div class="p-2 bg-gray-50 border border-gray-200 rounded-xl">07:30</div>
             <div class="p-2 bg-gray-50 border border-gray-200 rounded-xl">08:00</div>
             <div class="p-2 bg-gray-50 border border-gray-200 rounded-xl">08:40</div>
@@ -382,7 +449,6 @@
           </div>
         </div>
 
-        <!-- Section C: Dinner Shuttles -->
         <div class="bg-gray-50 rounded-2xl p-4 border border-gray-200">
           <div class="flex items-center gap-2 mb-2">
             <span class="px-2.5 py-1 rounded-md bg-amberwood-600 text-white text-xs font-extrabold">晚間商店街用餐接駁</span>
@@ -405,7 +471,7 @@
               </div>
             </div>
           </div>
-          <p class="text-[11px] text-gray-500 mt-2.5">★ <strong>重要叮嚀：</strong>清晨看日出期間（04:00~07:00）全區接駁車未營運，看日出請直接步行 3 分鐘至旁邊「沼平車站」搭火車，極為便利。</p>
+          <p class="text-[11px] text-gray-500 mt-2.5">★ <strong>重要叮嚀：</strong>清晨看日出期間（04:00~07:00）全區接駁車未營運，看日出請直接步行 3 分鐘至旁邊「沼平車站」搭火車即可。</p>
         </div>
       </div>
     </div>
@@ -430,7 +496,6 @@
       </div>
 
       <div class="p-6 space-y-6 text-sm text-gray-700">
-        <!-- Hotel Quick Specs -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
           <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
             <div class="text-[11px] text-gray-500">辦理入住</div>
@@ -450,13 +515,11 @@
           </div>
         </div>
 
-        <!-- Room Comparison -->
         <div>
           <h4 class="text-sm font-extrabold text-gray-900 mb-3 flex items-center gap-2">
             <i class="fa-solid fa-bed text-purple-600"></i> A棟木屋 ✕ B棟新改裝房型深度對比
           </h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- B-Wing -->
             <div class="border-2 border-emerald-500/80 bg-emerald-50/40 rounded-2xl p-4 relative">
               <span class="absolute top-3 right-3 text-[10px] font-extrabold bg-emerald-700 text-white px-2 py-0.5 rounded-full">首選推薦</span>
               <h5 class="font-extrabold text-forest-950 text-base">B棟（全新改裝館）</h5>
@@ -468,7 +531,6 @@
               </ul>
             </div>
 
-            <!-- A-Wing -->
             <div class="border border-gray-200 bg-white rounded-2xl p-4">
               <h5 class="font-extrabold text-gray-900 text-base">A棟（經典景觀館）</h5>
               <p class="text-xs text-gray-600 mt-1">傳統經典木屋建築，保留濃厚的檜木復古韻味。</p>
@@ -481,7 +543,6 @@
           </div>
         </div>
 
-        <!-- Practical Location Advantages -->
         <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 text-xs leading-relaxed space-y-2">
           <div class="font-bold text-gray-900 flex items-center gap-1.5">
             <i class="fa-solid fa-map-pin text-purple-700"></i> 阿里山閣絕佳位置優勢：
@@ -513,18 +574,15 @@
       </div>
 
       <div class="p-6 space-y-6 text-sm text-gray-700">
-        <!-- Route Steps Diagram -->
         <div class="space-y-4">
-          <!-- Step 1 -->
           <div class="flex items-start gap-3">
             <div class="w-7 h-7 rounded-full bg-forest-900 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
             <div>
-              <h5 class="font-bold text-gray-900">04:30~05:00 阿里山閣出發 ➔ 沼平車站（步行 3 分鐘）</h5>
+              <h5 class="font-bold text-gray-900">05:30~05:40 阿里山閣出發 ➔ 沼平車站（步行 3 分鐘）</h5>
               <p class="text-xs text-gray-600 mt-0.5">飯店門口右轉沿木棧道緩步 3 分鐘直抵沼平車站，刷票搭乘開往祝山的清晨觀日小火車。</p>
             </div>
           </div>
 
-          <!-- Step 2 -->
           <div class="flex items-start gap-3">
             <div class="w-7 h-7 rounded-full bg-forest-900 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
             <div>
@@ -533,16 +591,14 @@
             </div>
           </div>
 
-          <!-- Step 3 -->
           <div class="flex items-start gap-3">
             <div class="w-7 h-7 rounded-full bg-amberwood-500 text-forest-950 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
             <div class="bg-amber-50 p-3.5 rounded-2xl border border-amberwood-200">
               <h5 class="font-extrabold text-amberwood-900">祝山出站右轉 ➔ 小笠原山觀景台（步行約 10~15 分鐘）★關鍵秘技</h5>
-              <p class="text-xs text-amber-800 mt-1"><strong>不要停在祝山車站前平台人擠人！</strong>出站往右沿柏油小徑向上走約 500 公尺，抵達海拔 2,488 公尺的小笠原山。這裡擁有完全無死角的 360 度環景木棧平台，晨曦照耀玉山群峰與陳有蘭溪谷雲海，更是台灣特有國寶鳥「黑長尾雉（帝雉）」晨間覓食的棲地。</p>
+              <p class="text-xs text-amber-800 mt-1"><strong>不要停在祝山車站前平台人擠人！</strong>出站往右沿柏油小徑向上走約 500 公尺，抵達海拔 2,488 公尺的小笠原山。這裡擁有完全無死角的 360 度環景木棧平台，晨曦照耀玉山群峰與陳有蘭溪谷雲海，更是國寶鳥「黑長尾雉（帝雉）」晨間覓食的棲地。</p>
             </div>
           </div>
 
-          <!-- Step 4 -->
           <div class="flex items-start gap-3">
             <div class="w-7 h-7 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
             <div>
@@ -552,7 +608,6 @@
           </div>
         </div>
 
-        <!-- Gear & Ticket Note -->
         <div class="bg-gray-50 rounded-2xl p-4 border border-gray-200 text-xs space-y-2">
           <div class="font-bold text-gray-900">觀日票券與保暖要點：</div>
           <p>• <strong>車票購買</strong>：乘車前一天下午 16:30 可於阿里山車站 2 樓或林鐵官網預先購票（單程 NT$150 / 來回 NT$300）。</p>
@@ -581,7 +636,6 @@
       </div>
 
       <div class="p-6 space-y-5 text-sm text-gray-700">
-        <!-- Restaurant 1: 山賓餐廳 -->
         <div class="p-4 bg-orange-50/50 rounded-2xl border border-orange-200">
           <div class="flex items-center justify-between">
             <h5 class="font-extrabold text-orange-950 text-base">山賓餐廳（30年在地招牌第一名）</h5>
@@ -595,7 +649,6 @@
           <p class="text-[11px] text-gray-500 mt-2">★ 提示：晚間 17:30~19:00 極易客滿，不接受電話預約，建議搭乘 18:00 接駁車抵達後直接排隊候位。</p>
         </div>
 
-        <!-- Restaurant 2: 香姨小吃 -->
         <div class="p-4 bg-gray-50 rounded-2xl border border-gray-200">
           <div class="flex items-center justify-between">
             <h5 class="font-extrabold text-gray-900 text-base">香姨小吃（娜若瑪菲美食商圈內）</h5>
@@ -608,7 +661,6 @@
           </div>
         </div>
 
-        <!-- Practical 7-11 Supplies -->
         <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs">
           <div class="font-bold text-emerald-950 flex items-center gap-1.5 mb-1.5">
             <i class="fa-solid fa-store text-emerald-700"></i> 全台海拔最高便利商店補給：
@@ -619,7 +671,7 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL: ADD / EDIT TIMELINE ITEM ==================== -->
+  <!-- MODAL 5: ADD / EDIT TIMELINE ITEM -->
   <div id="itemModal" class="modal-backdrop fixed inset-0 z-50 bg-forest-950/70 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 animate-fade-slide">
       <div class="sticky top-0 bg-white border-b border-gray-100 p-5 flex items-center justify-between z-10">
@@ -690,7 +742,7 @@
 
         <div>
           <label class="block font-bold text-gray-700 mb-1">行前實用叮嚀 (Tip)</label>
-          <input type="text" id="fieldTip" placeholder="如：清晨氣溫接近 5°C，請穿防風羽絨衣與毛帽" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" />
+          <input type="text" id="fieldTip" placeholder="如：清晨氣溫接近 3°C，請穿防風羽絨衣與毛帽" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" />
         </div>
 
         <div class="flex items-center justify-end gap-2 pt-3 border-t border-gray-100">
@@ -703,7 +755,7 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // --- 完整預載資料集（針對 1/28 - 1/30 三天兩夜，含周邊景點備選與遊記連結） ---
+    // --- 完整預載資料集（1/28 - 1/30 三天兩夜） ---
     const defaultItinerary = [
       // ========== DAY 1: 1/28 (三) ==========
       {
@@ -740,7 +792,7 @@
         type: "transit",
         image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80",
         location: "國道一號泰安服務區",
-        desc: "作為中台灣最佳中繼站，泰安服務區擁有夢幻的白色積木星巴克與開闊綠意步道。全體下車走動伸展筋骨、使用洗手間並買杯現沖熱咖啡喚醒一整天的元氣。",
+        desc: "中台灣最佳中繼站，泰安服務區擁有夢幻的白色積木星巴克與開闊綠意步道。全體下車走動伸展筋骨、使用洗手間並買杯現沖熱咖啡喚醒一整天的元氣。",
         highlights: [
           "積木造型星巴克打卡地標",
           "熱咖啡與輕食隨車補給"
@@ -767,9 +819,9 @@
         desc: "位於阿里山公路起點（觸口），在此正式向平原告別、準備盤山而上。遼闊無邊的綠意大草原點綴著浪漫地景藝術，可遠眺阿里山山脈前緣壯麗山稜。",
         highlights: [
           "免費品嚐一整塊現烤熱鳳梨酥與高山烏龍熱茶",
-          "在綠地大草原舒展筋骨、適應高度轉換"
+          "在綠地大草原舒展筋骨、讓孩子跑跳釋放體力"
         ],
-        tip: "入山前最後平坦開闊腹地，乘客可在此服用防暈車物資。",
+        tip: "入山前最後平坦腹地，建議此時讓易暈車的孩子服用暈車藥。",
         nearby: [
           { name: "逐鹿部落梅花鹿生態園區", desc: "步行可達，近距離餵食梅花鹿體驗鄒族文化" },
           { name: "觸口遊客中心 ✕ 地久橋", desc: "古色古香的吊橋風景，遠眺八掌溪" }
@@ -789,13 +841,13 @@
         type: "dining",
         image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
         location: "嘉義縣竹崎鄉中和村奮起湖",
-        desc: "海拔約 1,400 公尺的經典鐵道山城，因三面環山形如畚箕而得名。木造老車站、石階巷弄與百年肖楠林相互輝映，是入園前最重要的美食與心靈補給站。",
+        desc: "海拔約 1,400 公尺的經典鐵道山城，因三面環山形如畚箕而得名。木造老車站、石階巷弄與百年肖楠林相互輝映，是入園前最重要的美食補給站。",
         highlights: [
           "百年檜木甜甜圈：外酥內軟、現烤濃郁奶香（建議抵達先取號碼牌）",
-          "經典奮起湖鐵路排骨/戰斧軟燒便當：滿滿懷舊木盒香",
+          "經典奮起湖鐵路排骨便當：大口吃肉補充體力",
           "天然手洗野生檸檬愛玉、老老街街仔尾阿嬤草仔粿"
         ],
-        tip: "奮起湖第一停車場車位有限，老街石階濕滑建議穿著健行鞋。",
+        tip: "奮起湖第一停車場車位有限，老街石階濕滑建議穿著健行球鞋。",
         nearby: [
           { name: "百年肖楠林步道", desc: "老街上方幽靜的高聳肖楠古木群，散步 15 分鐘" },
           { name: "奮起湖巨木棧道", desc: "平緩木棧道，觀賞舊林鐵機車庫與高聳紅檜" }
@@ -815,9 +867,9 @@
         type: "hotel",
         image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
         location: "阿里山國家森林遊樂區遊客中心停車場",
-        desc: "車輛駛入阿里山國家森林遊樂區大門售票處，依工作人員指引停放在遊客中心旁大停車場。收拾過夜行李至遊客中心前搭乘「阿里山閣大飯店」專屬 20 人座白色接駁中巴。",
+        desc: "車輛駛入阿里山森林遊樂區大門售票處，依指引停放在遊客中心旁大停車場。收拾過夜行李至遊客中心前搭乘「阿里山閣大飯店」專屬 20 人座白色接駁中巴直達飯店大廳。",
         highlights: [
-          "車程約 6 分鐘穿過森林管制區直達飯店大廳",
+          "車程約 6 分鐘穿過森林管制區直達飯店大門",
           "接駁發車時間：12:30 ~ 17:00 每半小時一班（整點與半點發車）"
         ],
         tip: "若抵達候車處未見接駁車，可直接致電飯店櫃檯：05-2679611。",
@@ -890,12 +942,12 @@
         type: "sunrise",
         image: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80",
         location: "阿里山林鐵沼平車站",
-        desc: "阿里山閣最大特權——步行至沼平車站僅需 2~3 分鐘！穿好防風羽絨外套與毛帽，在星斗與冷冽純淨的空氣中搭上開往台灣鐵道最高點的祝山觀日小火車（1月下旬日出約 06:48）。",
+        desc: "阿里山閣最大特權——步行至沼平車站僅需 2~3 分鐘！讓孩子戴好毛帽、防風手套，拿著手電筒照亮步道，在冷冽純淨的空氣中搭上開往台灣鐵道最高點的祝山觀日小火車（1/29 日出約 06:48）。",
         highlights: [
           "免去起大早從旅客中心排隊推擠，沼平站上車更悠閒",
           "車程約 25 分鐘穿過黑夜原始森林直上海拔 2,451 公尺祝山站"
         ],
-        tip: "1月清晨氣溫接近 0°C ~ 4°C，毛帽、防風手套及保暖圍巾為必備裝備。",
+        tip: "1月清晨氣溫接近 0°C ~ 4°C，毛帽、防風手套、溫水保溫瓶為必備裝備。",
         nearby: [
           { name: "祝山車站觀日平台", desc: "出站即達的經典觀日台，設有木造弧形看台" },
           { name: "祝山林道慢跑步道", desc: "清晨針葉林在薄霧中的幽靜道路" }
@@ -920,7 +972,7 @@
           "運氣好可近距離偶遇台灣國寶「黑長尾雉（帝雉）」林間漫步",
           "雲海翻騰於腳下八掌溪與陳有蘭溪谷之間"
         ],
-        tip: "小笠原山風勢強勁，拍照時留意隨身手機與保暖防風。",
+        tip: "小笠原山風勢強勁，等待破曉時讓孩子喝保溫瓶溫水暖胃。",
         nearby: [
           { name: "茶田 35 號高山茶館", desc: "位於小笠原山步道旁，觀日後喝杯手沖熱烏龍暖身" },
           { name: "對高岳觀日坪", desc: "林道另一側步道終點，楓紅與鐵道弧線攝影聖地" }
@@ -945,7 +997,7 @@
           "早晨最純淨的針葉林芬多精森林浴",
           "回房沖個熱水澡、整理裝備，在陽台欣賞沼平森林景致"
         ],
-        tip: "下坡石階清晨或有晨霜微濕，請踏穩腳步放慢呼吸。",
+        tip: "下坡石階清晨或有薄霜微濕，提醒孩子踏穩腳步放慢速度。",
         nearby: [
           { name: "高山植物園", desc: "位於祝山與小笠原山之間，展示阿里山特有種高山植物" },
           { name: "阿里山閣景觀露台", desc: "飯店頂樓可眺望大塔山雄偉峭壁" }
@@ -993,7 +1045,7 @@
         highlights: [
           "穿行於翠綠苔蘚與百年木造桁架橋上，氣氛空靈宛如宮崎駿動畫",
           "水山巨木：樹圍達 16 公尺，是阿里山目前發現樹圍最大的古老紅檜神木",
-          "原路平緩折返，全程平緩無階梯"
+          "原路平緩折返，全程平緩無階梯，非常適合孩子輕鬆散步"
         ],
         tip: "午後森林容易起霧，白霧瀰漫鐵道特別夢幻，請備妥外套防涼。",
         nearby: [
@@ -1129,11 +1181,55 @@
       }
     ];
 
-    // State
+    // --- 親子抗寒裝備清單定義 (參考健行筆記 & 親子山友經驗) ---
+    const defaultChecklistCategories = [
+      {
+        id: "wear",
+        category: "👶 孩子核心穿搭（三層穿衣法）",
+        items: [
+          { id: "c1", label: "底層排汗發熱衣（2件）", desc: "切忌純棉衛生衣！排汗快乾材質才能避免出汗後著涼失溫" },
+          { id: "c2", label: "中層保暖刷毛衣 / 羽絨背心", desc: "蓄熱層，白天在林間健行感覺熱時可隨時拉開拉鍊" },
+          { id: "c3", label: "外層連帽防風衝鋒衣 / 厚羽絨外套", desc: "外層防風是關鍵！小笠原山晨間風大，無防風層羽絨易透風" },
+          { id: "c4", label: "下身：刷毛保暖褲 + 防風防潑長褲", desc: "避免單穿薄運動褲，清晨草木露水重防潑水尤佳" },
+          { id: "c5", label: "厚底健行襪 / 羊毛襪（多備2雙）", desc: "厚毛圈保暖防腳底摩擦起水泡，萬一踩濕可更換" },
+          { id: "c6", label: "抓地防滑球鞋 / 健行鞋", desc: "木棧道有霜露易滑，切勿穿平底板鞋或舊布鞋" }
+        ]
+      },
+      {
+        id: "head_hand",
+        category: "🧣 頭部與肢體防風防凍",
+        items: [
+          { id: "c7", label: "保暖毛帽（需能完整包覆雙耳）", desc: "高山 70% 熱量從頭部散失，頭部受風是引起頭痛與高山症主因" },
+          { id: "c8", label: "防風保暖手套（每人一雙）", desc: "在觀日平台等候日出 30 分鐘，不戴手套手會凍僵麻木" },
+          { id: "c9", label: "魔術頭巾 / 保暖圍脖", desc: "阻擋清晨乾冷空氣直接吸入肺部，大幅減少劇烈乾咳" }
+        ]
+      },
+      {
+        id: "gear",
+        category: "🔦 觀日出行動裝備與暖身",
+        items: [
+          { id: "c10", label: "小型手電筒 / 輕量頭燈", desc: "清晨林道昏暗，孩子拿手電筒照路安全且具探索樂趣（避免用手機照耗盡電力）" },
+          { id: "c11", label: "不銹鋼保溫瓶 500ml（每人一個）", desc: "裝 60~70°C 溫熱水，觀景台寒風中喝上一口熱水瞬間暖胃" },
+          { id: "c12", label: "貼式暖暖包 + 手握暖暖包（數包）", desc: "貼式貼於發熱衣後背（避開皮膚），手握款放外套口袋" },
+          { id: "c13", label: "輕量隨身雙肩小背包", desc: "讓國中/國小孩子背自己的水壺與零食，分擔負重且活動自如" }
+        ]
+      },
+      {
+        id: "medical",
+        category: "🍫 飲食補給與醫藥應急",
+        items: [
+          { id: "c14", label: "高熱量零食（威化餅/巧克力/能量果凍）", desc: "健行低溫耗能極快，孩子感到疲勞前適時補充糖分預防低血糖" },
+          { id: "c15", label: "兒童長途暈車藥 / 暈車貼片", desc: "阿里山公路連續彎道 2 小時，出發前 30 分鐘務必讓孩子服用" },
+          { id: "c16", label: "高山保濕乳液 + 滋潤護唇膏", desc: "高山乾燥冷風強勁，防止孩子臉頰乾裂脫皮與嘴唇乾裂流血" }
+        ]
+      }
+    ];
+
+    // State Variables
     let itineraryData = [];
     let currentFilterDay = 'all';
+    let checklistState = {}; // { c1: true, c2: false, ... }
 
-    // Type definition and badges
     const typeMeta = {
       transit: { label: "行車/休息", bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200", icon: "fa-car-side" },
       dining:  { label: "在地美食", bg: "bg-amber-50", text: "text-amber-800", border: "border-amber-200", icon: "fa-utensils" },
@@ -1145,11 +1241,110 @@
     // Initialize
     window.onload = function() {
       loadState();
+      loadChecklistState();
       renderTimeline();
+      renderChecklist();
+      initSunriseAnimation(); // 啟動阿里山日出 Canvas 動畫
     };
 
+    // --- LocalStorage Checklist Persistence ---
+    function loadChecklistState() {
+      const stored = localStorage.getItem("alishan_checklist_state_v2");
+      if (stored) {
+        try {
+          checklistState = JSON.parse(stored);
+        } catch(e) {
+          checklistState = {};
+        }
+      } else {
+        checklistState = {};
+      }
+    }
+
+    function saveChecklistState() {
+      localStorage.setItem("alishan_checklist_state_v2", JSON.stringify(checklistState));
+      updateChecklistProgressUI();
+    }
+
+    function toggleChecklistItem(id) {
+      checklistState[id] = !checklistState[id];
+      saveChecklistState();
+      renderChecklist();
+      showToast(checklistState[id] ? "已勾選完成！已儲存於手機紀錄中" : "已取消勾選", "fa-check");
+    }
+
+    function resetChecklist() {
+      checklistState = {};
+      saveChecklistState();
+      renderChecklist();
+      showToast("已重置所有清單勾選狀態", "fa-rotate-left");
+    }
+
+    function renderChecklist() {
+      const container = document.getElementById("checklistContainer");
+      if (!container) return;
+      container.innerHTML = "";
+
+      defaultChecklistCategories.forEach(cat => {
+        const catDiv = document.createElement("div");
+        catDiv.className = "bg-gray-50/80 rounded-2xl p-4 border border-gray-200";
+
+        const title = document.createElement("h4");
+        title.className = "text-xs font-black text-gray-900 mb-2.5 flex items-center gap-1.5";
+        title.innerText = cat.category;
+        catDiv.appendChild(title);
+
+        const listDiv = document.createElement("div");
+        listDiv.className = "space-y-2";
+
+        cat.items.forEach(item => {
+          const checked = !!checklistState[item.id];
+          const itemDiv = document.createElement("label");
+          itemDiv.className = `flex items-start gap-3 p-2.5 rounded-xl cursor-pointer transition border ${checked ? 'bg-emerald-50/80 border-emerald-300' : 'bg-white border-gray-200 hover:bg-gray-100/60'}`;
+          
+          itemDiv.innerHTML = `
+            <input type="checkbox" onchange="toggleChecklistItem('${item.id}')" ${checked ? 'checked' : ''} class="w-4 h-4 mt-0.5 rounded text-emerald-700 focus:ring-emerald-500 cursor-pointer flex-shrink-0" />
+            <div class="flex-grow">
+              <span class="text-xs font-extrabold ${checked ? 'line-through text-emerald-900/70' : 'text-gray-900'} block">
+                ${item.label}
+              </span>
+              <span class="text-[11px] text-gray-500 leading-tight block mt-0.5">
+                ${item.desc}
+              </span>
+            </div>
+          `;
+          listDiv.appendChild(itemDiv);
+        });
+
+        catDiv.appendChild(listDiv);
+        container.appendChild(catDiv);
+      });
+
+      updateChecklistProgressUI();
+    }
+
+    function updateChecklistProgressUI() {
+      let total = 0;
+      let checkedCount = 0;
+      defaultChecklistCategories.forEach(cat => {
+        cat.items.forEach(item => {
+          total++;
+          if (checklistState[item.id]) checkedCount++;
+        });
+      });
+
+      const percent = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+      const bar = document.getElementById("checklistBar");
+      const text = document.getElementById("checklistPercentage");
+      const btnText = document.getElementById("btnChecklistProgress");
+
+      if (bar) bar.style.width = `${percent}%`;
+      if (text) text.innerText = `${percent}% (${checkedCount}/${total})`;
+      if (btnText) btnText.innerText = `${checkedCount}/${total}`;
+    }
+
+    // --- Timeline Persistence & Sharing ---
     function loadState() {
-      // 1. URL Hash Check
       if (window.location.hash && window.location.hash.length > 5) {
         try {
           const raw = window.location.hash.substring(1);
@@ -1158,11 +1353,10 @@
           showToast("已成功載入分享的自訂行程！", "fa-check");
           return;
         } catch(e) {
-          console.warn("無法解析網址 Hash，轉讀本地儲存", e);
+          console.warn("Hash 解析失敗，切換讀取本地儲存", e);
         }
       }
 
-      // 2. LocalStorage Check
       const local = localStorage.getItem("alishan_explorer_pro_v3_3days");
       if (local) {
         try {
@@ -1171,7 +1365,6 @@
         } catch(e) {}
       }
 
-      // 3. Fallback
       itineraryData = JSON.parse(JSON.stringify(defaultItinerary));
     }
 
@@ -1179,7 +1372,6 @@
       localStorage.setItem("alishan_explorer_pro_v3_3days", JSON.stringify(itineraryData));
     }
 
-    // Render Timeline with Images, Surrounding Spots & Guidebook Links
     function renderTimeline() {
       const container = document.getElementById("timelineContainer");
       container.innerHTML = "";
@@ -1204,8 +1396,7 @@
 
       let lastDaySeen = null;
 
-      filtered.forEach((item, index) => {
-        // Day Section Divider
+      filtered.forEach((item) => {
         if (currentFilterDay === 'all' && item.day !== lastDaySeen) {
           lastDaySeen = item.day;
           const dayTitles = {
@@ -1246,14 +1437,12 @@
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden"></div>
             
-            <!-- Type Pill (Mobile Floating) -->
             <div class="absolute top-3 left-3 flex items-center gap-2">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black shadow-md ${meta.bg} ${meta.text} border ${meta.border}">
                 <i class="fa-solid ${meta.icon} mr-1.5"></i> ${meta.label}
               </span>
             </div>
 
-            <!-- Date Label -->
             <div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded-md bg-black/60 text-white text-[11px] font-mono backdrop-blur-sm">
               <i class="fa-regular fa-calendar mr-1"></i> ${item.dateStr || `Day ${item.day}`}
             </div>
@@ -1268,7 +1457,6 @@
           <!-- Right Content Body -->
           <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between">
             <div>
-              <!-- Time and Quick Actions -->
               <div class="flex items-center justify-between gap-2 pb-2">
                 <div class="flex items-center gap-2 flex-wrap text-xs font-semibold text-gray-500">
                   <span class="px-2.5 py-1 rounded-lg bg-gray-100 text-gray-700 font-mono font-bold">
@@ -1279,7 +1467,6 @@
                   </span>
                 </div>
 
-                <!-- Admin Action Tools -->
                 <div class="flex items-center gap-1 no-print">
                   <button onclick="moveItem('${item.id}', -1)" class="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg text-xs" title="上移">
                     <i class="fa-solid fa-arrow-up"></i>
@@ -1296,7 +1483,6 @@
                 </div>
               </div>
 
-              <!-- Title & Map Navigation -->
               <div class="mt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <h3 class="text-lg sm:text-xl font-extrabold text-forest-950 tracking-tight">
                   ${item.title}
@@ -1307,12 +1493,10 @@
                 </a>
               </div>
 
-              <!-- Description -->
               <p class="mt-3 text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
                 ${item.desc || '暫無描述。'}
               </p>
 
-              <!-- Highlights Tags -->
               ${item.highlights && item.highlights.length > 0 ? `
                 <div class="mt-3 bg-gray-50/80 rounded-2xl p-3 border border-gray-100">
                   <div class="text-[11px] font-bold text-gray-900 mb-1.5 flex items-center gap-1.5">
@@ -1328,7 +1512,6 @@
                 </div>
               ` : ''}
 
-              <!-- NEW FEATURE: Nearby / Alternative Spots -->
               ${item.nearby && item.nearby.length > 0 ? `
                 <div class="mt-3 bg-emerald-50/50 rounded-2xl p-3 border border-emerald-100">
                   <div class="text-[11px] font-bold text-forest-900 mb-1 flex items-center gap-1.5">
@@ -1347,7 +1530,6 @@
                 </div>
               ` : ''}
 
-              <!-- NEW FEATURE: Related Travelogues & Official Links -->
               ${item.articleLinks && item.articleLinks.length > 0 ? `
                 <div class="mt-2.5 flex items-center gap-2 flex-wrap text-xs">
                   <span class="text-[11px] font-bold text-gray-500 flex items-center gap-1">
@@ -1362,7 +1544,6 @@
               ` : ''}
             </div>
 
-            <!-- Warning / Tips Footer -->
             ${item.tip ? `
               <div class="mt-4 pt-3 border-t border-gray-100 flex items-start gap-2 text-xs text-amber-950 bg-amber-50/70 px-3 py-2 rounded-xl border border-amber-200/60">
                 <i class="fa-solid fa-lightbulb text-amberwood-600 mt-0.5 flex-shrink-0"></i>
@@ -1376,7 +1557,7 @@
       });
     }
 
-    // Tab Filters
+    // --- Tab Filters ---
     function setDayFilter(day) {
       currentFilterDay = day;
       const btnAll = document.getElementById('tabAll');
@@ -1395,7 +1576,7 @@
       renderTimeline();
     }
 
-    // Modal Manager
+    // --- Modal Managers ---
     function openModal(modalId) {
       const el = document.getElementById(modalId);
       if (el) el.classList.remove('hidden');
@@ -1406,7 +1587,7 @@
       if (el) el.classList.add('hidden');
     }
 
-    // Auto Recalculate Time Timeline based on duration
+    // --- Auto Recalculate Time Timeline based on duration ---
     function autoRecalculateTimeline() {
       if (itineraryData.length <= 1) return;
 
@@ -1430,7 +1611,7 @@
 
       saveState();
       renderTimeline();
-      showToast("已依據各站停留時長自動重新順延抵達時間！", "fa-clock");
+      showToast("已依據停留時長自動重新順延抵達時間！", "fa-clock");
     }
 
     function timeToMinutes(str) {
@@ -1551,7 +1732,7 @@
       renderTimeline();
     }
 
-    // Share link by generating Base64 encoded JSON in the hash
+    // Share link with Base64 URL Hash
     function sharePlan() {
       try {
         const json = JSON.stringify(itineraryData);
@@ -1597,6 +1778,114 @@
         toast.classList.remove("translate-y-0", "opacity-100");
         toast.classList.add("translate-y-28", "opacity-0");
       }, 3500);
+    }
+
+    // ==================== 阿里山日出與雲海動態 CANVAS 動畫 ====================
+    function initSunriseAnimation() {
+      const canvas = document.getElementById('sunriseCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let animationFrameId;
+
+      function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let step = 0;
+
+      function draw() {
+        step += 0.008;
+        const w = canvas.width;
+        const h = canvas.height;
+
+        // 1. 動態晨曦天空漸層
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, h);
+        skyGrad.addColorStop(0, '#06130b');   // 破曉前深黑林夜
+        skyGrad.addColorStop(0.35, '#132e1d'); // 深墨綠
+        skyGrad.addColorStop(0.7, '#643212');  // 晨曦朝霞火紅金
+        skyGrad.addColorStop(1, '#a16207');    // 破曉地平線金色
+        ctx.fillStyle = skyGrad;
+        ctx.fillRect(0, 0, w, h);
+
+        // 2. 玉山日出太陽金光與朝陽光暈
+        const sunX = w * 0.72; // 朝向玉山東方位置
+        const sunBaseY = h * 0.52;
+        const sunRiseY = sunBaseY - Math.sin(step * 0.5) * 12; // 太陽緩緩升起與金光呼吸
+
+        // 金色光芒輻射 (Radial Glow)
+        const glowRadius = Math.min(w, h) * 0.65;
+        const sunGlow = ctx.createRadialGradient(sunX, sunRiseY, 15, sunX, sunRiseY, glowRadius);
+        sunGlow.addColorStop(0, 'rgba(254, 240, 138, 0.95)'); // 核心熾白金
+        sunGlow.addColorStop(0.2, 'rgba(245, 158, 11, 0.6)');  // 暖金黃
+        sunGlow.addColorStop(0.5, 'rgba(217, 119, 6, 0.25)'); // 霞紅
+        sunGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = sunGlow;
+        ctx.beginPath();
+        ctx.arc(sunX, sunRiseY, glowRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 太陽實體日輪
+        ctx.fillStyle = '#fffbeb';
+        ctx.beginPath();
+        ctx.arc(sunX, sunRiseY, 26, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 3. 遠景山脈剪影（玉山主峰與中央山脈）
+        ctx.fillStyle = '#1c1917';
+        ctx.beginPath();
+        ctx.moveTo(0, h * 0.68);
+        ctx.lineTo(w * 0.15, h * 0.6);
+        ctx.lineTo(w * 0.35, h * 0.65);
+        ctx.lineTo(w * 0.55, h * 0.56);
+        ctx.lineTo(w * 0.72, h * 0.5); // 玉山尖峰
+        ctx.lineTo(w * 0.85, h * 0.58);
+        ctx.lineTo(w, h * 0.63);
+        ctx.lineTo(w, h);
+        ctx.lineTo(0, h);
+        ctx.closePath();
+        ctx.fill();
+
+        // 4. 動態雲海層 (Flowing Sea of Clouds)
+        for (let layer = 0; layer < 3; layer++) {
+          ctx.beginPath();
+          ctx.moveTo(0, h);
+          const opacity = 0.25 + layer * 0.15;
+          ctx.fillStyle = `rgba(248, 250, 252, ${opacity})`;
+
+          const layerSpeed = (layer + 1) * 0.6;
+          const waveHeight = 12 + layer * 8;
+          const baseHeight = h * (0.64 + layer * 0.08);
+
+          for (let x = 0; x <= w; x += 15) {
+            const y = baseHeight + Math.sin(x * 0.005 + step * layerSpeed) * waveHeight + Math.cos(x * 0.01 - step * 0.5) * 6;
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(w, h);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        // 5. 前景近景巨木與森林剪影（阿里山檜木與冷杉輪廓）
+        ctx.fillStyle = '#051b0e';
+        ctx.beginPath();
+        ctx.moveTo(0, h * 0.82);
+        ctx.lineTo(w * 0.18, h * 0.76);
+        ctx.lineTo(w * 0.4, h * 0.84);
+        ctx.lineTo(w * 0.65, h * 0.79);
+        ctx.lineTo(w * 0.88, h * 0.86);
+        ctx.lineTo(w, h * 0.81);
+        ctx.lineTo(w, h);
+        ctx.lineTo(0, h);
+        ctx.closePath();
+        ctx.fill();
+
+        animationFrameId = requestAnimationFrame(draw);
+      }
+
+      draw();
     }
   </script>
 </body>
