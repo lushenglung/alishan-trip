@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>阿里山日出巨木・雙日漫遊指南 ✕ Alishan Explorer Pro</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts: Noto Sans TC & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              700: '#15803d',
+              800: '#166534',
+              850: '#104e28',
+              900: '#14532d',
+              950: '#052e16',
+            },
+            amberwood: {
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+            },
+            mist: '#f8faf9',
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          animation: {
+            'glow-pulse': 'glowPulse 2.5s infinite ease-in-out',
+            'fade-slide': 'fadeSlideUp 0.4s ease-out forwards',
+          },
+          keyframes: {
+            glowPulse: {
+              '0%, 100%': { boxShadow: '0 0 15px rgba(251, 191, 36, 0.4), inset 0 0 15px rgba(251, 191, 36, 0.2)' },
+              '50%': { boxShadow: '0 0 30px rgba(245, 158, 11, 0.8), inset 0 0 20px rgba(245, 158, 11, 0.4)' },
+            },
+            fadeSlideUp: {
+              '0%': { opacity: '0', transform: 'translateY(16px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+
+    /* Print Travel Guidebook Styles */
+    @media print {
+      body {
+        background: white !important;
+        color: #111827 !important;
+      }
+      .no-print, header, .quick-dock, .modal-backdrop, button, .action-bar {
+        display: none !important;
+      }
+      .print-header {
+        display: block !important;
+      }
+      .timeline-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #d1d5db !important;
+        margin-bottom: 1.5rem !important;
+      }
+      .card-content {
+        display: block !important;
+      }
+      .print-badge {
+        display: inline-block !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#f3f6f4] text-gray-800 font-sans antialiased min-h-screen flex flex-col selection:bg-amberwood-400 selection:text-forest-950">
+
+  <!-- Toast Notification System -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-28 opacity-0 transition-all duration-300 bg-gray-900/95 backdrop-blur-md text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/10">
+    <div id="toastIconWrapper" class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+      <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+    </div>
+    <div>
+      <h4 id="toastTitle" class="text-xs font-bold text-gray-200">系統提示</h4>
+      <p id="toastMsg" class="text-xs text-gray-300 font-medium">訊息已儲存</p>
+    </div>
+  </div>
+
+  <!-- Print-Only Guidebook Header -->
+  <div class="hidden print-header p-6 border-b-2 border-forest-900 mb-6">
+    <h1 class="text-3xl font-extrabold text-forest-950">阿里山日出巨木・雙日自駕旅行手冊</h1>
+    <p class="text-sm text-gray-600 mt-1">中和啟程 ✕ 阿里山閣大飯店 ✕ 巨木群純下坡巡禮 ✕ 小笠原 360° 晨曦破曉</p>
+    <div class="mt-2 text-xs text-gray-500">阿里山閣櫃檯專線：05-2679611 ｜ 阿里山祝山觀日小火車提前於前日 16:30 購票</div>
+  </div>
+
+  <!-- MAIN APP WRAPPER -->
+  <div class="flex-grow flex flex-col">
+
+    <!-- HERO SECTION WITH IMMERSIVE ALISHAN SUNRISE BANNER -->
+    <header class="relative bg-forest-950 text-white overflow-hidden shadow-2xl">
+      <!-- High Resolution Sunrise & Clouds Background -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=80" 
+          alt="阿里山日出雲海" 
+          class="w-full h-full object-cover object-center scale-105 transform opacity-35 filter brightness-90 saturate-125"
+          onerror="this.src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80'"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/70 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-forest-950/90 via-transparent to-forest-950/80"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 relative z-10">
+        <!-- Top Nav Tag & Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-amberwood-400 text-xs font-bold tracking-wider backdrop-blur-md uppercase">
+            <span class="w-2 h-2 rounded-full bg-amberwood-400 animate-ping inline-block mr-1"></span>
+            2026 最新路況 ✕ 步道無障礙攻略
+          </div>
+
+          <!-- Utility Action Buttons -->
+          <div class="flex flex-wrap items-center gap-2 no-print">
+            <button onclick="sharePlan()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amberwood-400 to-amberwood-500 hover:from-amberwood-500 hover:to-amberwood-600 text-forest-950 font-extrabold text-xs tracking-wide shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2 active:scale-95">
+              <i class="fa-solid fa-share-nodes text-sm"></i> 複製分享連結給好友
+            </button>
+            <button onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs backdrop-blur-md transition-all flex items-center gap-2 active:scale-95">
+              <i class="fa-solid fa-print"></i> 列印手冊 / PDF
+            </button>
+            <button onclick="resetDefaultPlan()" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-emerald-200 text-xs" title="重設為預設最佳規劃">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Title & Lead Text -->
+        <div class="max-w-3xl">
+          <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight sm:leading-none text-white drop-shadow-md">
+            中和出發 <span class="text-amberwood-400">✕</span> 阿里山閣<br class="hidden sm:inline" />
+            <span class="bg-gradient-to-r from-amberwood-300 via-amberwood-400 to-emerald-200 bg-clip-text text-transparent">日出巨木・雙日漫遊指南</span>
+          </h1>
+          <p class="mt-4 text-sm sm:text-base text-emerald-100/85 leading-relaxed font-normal">
+            避開人潮的專屬動線：入住幽靜沼平「阿里山閣大飯店」，走巨木棧道純下坡巡禮兩千年香林神木；翌日晨曦登頂小笠原山 360° 環景平台，迎玉山群峰破曉金光。
+          </p>
+        </div>
+
+        <!-- High-Altitude Weather & Gear Status Banner -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mt-8">
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/15">
+            <div class="text-[11px] font-semibold text-emerald-200/80 flex items-center gap-1.5">
+              <i class="fa-solid fa-temperature-arrow-down text-cyan-300"></i> 高山清晨氣溫
+            </div>
+            <div class="text-lg sm:text-xl font-extrabold text-white mt-1">4°C ～ 15°C</div>
+            <div class="text-[10px] text-emerald-300/80 mt-0.5">防風外套、毛帽手套必備</div>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/15">
+            <div class="text-[11px] font-semibold text-amberwood-300/80 flex items-center gap-1.5">
+              <i class="fa-solid fa-sun text-amberwood-400"></i> 建議觀日時間
+            </div>
+            <div class="text-lg sm:text-xl font-extrabold text-amberwood-400 mt-1">05:40 ～ 06:10</div>
+            <div class="text-[10px] text-amberwood-200/80 mt-0.5">前一日 16:30 公告首班車</div>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/15">
+            <div class="text-[11px] font-semibold text-emerald-200/80 flex items-center gap-1.5">
+              <i class="fa-solid fa-van-shuttle text-emerald-300"></i> 阿里山閣接駁
+            </div>
+            <div class="text-lg sm:text-xl font-extrabold text-white mt-1">12:30 ~ 17:00</div>
+            <div class="text-[10px] text-emerald-300/80 mt-0.5">遊客中心候車 每半小時發車</div>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/15">
+            <div class="text-[11px] font-semibold text-purple-200/80 flex items-center gap-1.5">
+              <i class="fa-solid fa-route text-purple-300"></i> 總路程里程
+            </div>
+            <div class="text-lg sm:text-xl font-extrabold text-white mt-1">約 540 km</div>
+            <div class="text-[10px] text-purple-200/80 mt-0.5">國3高架 ✕ 台18阿里山公路</div>
+          </div>
+        </div>
+
+        <!-- 4 QUICK MODAL DOCK BUTTONS -->
+        <div class="mt-8 pt-6 border-t border-white/15 no-print">
+          <div class="text-xs font-bold text-amberwood-300/90 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-bolt-lightning text-amberwood-400"></i> 核心必備專屬互動攻略面板 (點擊立即開啟)
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button onclick="openModal('shuttleModal')" class="p-3.5 rounded-2xl bg-white/10 hover:bg-emerald-600/30 border border-emerald-400/40 text-left transition-all backdrop-blur-md group hover:scale-[1.02] shadow-sm active:scale-95">
+              <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-sm mb-2 group-hover:bg-emerald-500 group-hover:text-white transition">
+                <i class="fa-solid fa-van-shuttle"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-white group-hover:text-amberwood-300 transition">接駁車專屬時刻表</h4>
+              <p class="text-[11px] text-gray-300 mt-0.5">進退房與晚間用餐接送 ➔</p>
+            </button>
+
+            <button onclick="openModal('hotelModal')" class="p-3.5 rounded-2xl bg-white/10 hover:bg-purple-600/30 border border-purple-400/40 text-left transition-all backdrop-blur-md group hover:scale-[1.02] shadow-sm active:scale-95">
+              <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-sm mb-2 group-hover:bg-purple-500 group-hover:text-white transition">
+                <i class="fa-solid fa-hotel"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-white group-hover:text-amberwood-300 transition">阿里山閣住宿＆房型</h4>
+              <p class="text-[11px] text-gray-300 mt-0.5">A/B棟對比與一鍵撥號 ➔</p>
+            </button>
+
+            <button onclick="openModal('sunriseModal')" class="p-3.5 rounded-2xl bg-white/10 hover:bg-amber-600/30 border border-amber-400/50 text-left transition-all backdrop-blur-md group hover:scale-[1.02] shadow-sm active:scale-95">
+              <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amberwood-400 flex items-center justify-center text-sm mb-2 group-hover:bg-amber-500 group-hover:text-forest-950 transition">
+                <i class="fa-solid fa-mountain-sun"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-white group-hover:text-amberwood-300 transition">小笠原 360° 觀日路線</h4>
+              <p class="text-[11px] text-gray-300 mt-0.5">避開人潮純下坡動線圖 ➔</p>
+            </button>
+
+            <button onclick="openModal('foodModal')" class="p-3.5 rounded-2xl bg-white/10 hover:bg-orange-600/30 border border-orange-400/40 text-left transition-all backdrop-blur-md group hover:scale-[1.02] shadow-sm active:scale-95">
+              <div class="w-8 h-8 rounded-xl bg-orange-500/20 text-orange-300 flex items-center justify-center text-sm mb-2 group-hover:bg-orange-500 group-hover:text-white transition">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-white group-hover:text-amberwood-300 transition">商店街美食指南</h4>
+              <p class="text-[11px] text-gray-300 mt-0.5">山賓火鍋與在地補給地圖 ➔</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- STICKY ACTION & DAY SELECTOR BAR -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-lg border-b border-gray-200/80 shadow-sm no-print">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+        <!-- Day Tabs -->
+        <div class="flex items-center gap-1.5 p-1 bg-gray-100 rounded-2xl border border-gray-200/70">
+          <button id="tabAll" onclick="setDayFilter('all')" class="px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-forest-900 text-white shadow-sm">
+            全部日程 (12站)
+          </button>
+          <button id="tabDay1" onclick="setDayFilter(1)" class="px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:text-forest-900 transition-all">
+            Day 1：中和 ➔ 巨木之宿
+          </button>
+          <button id="tabDay2" onclick="setDayFilter(2)" class="px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:text-forest-900 transition-all">
+            Day 2：小笠原日出 ➔ 隙頂雲海
+          </button>
+        </div>
+
+        <!-- Schedule Utilities -->
+        <div class="flex items-center gap-2">
+          <button onclick="autoRecalculateTimeline()" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95" title="根據每個點設定的停留分鐘數，自動依序推算整天的抵達時間">
+            <i class="fa-solid fa-clock-rotate-left text-forest-700"></i>
+            <span class="hidden sm:inline">自動按停留時長</span>順延時間
+          </button>
+          <button onclick="openAddModal()" class="px-3.5 py-1.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
+            <i class="fa-solid fa-plus"></i> 新增站點
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- TIMELINE LIST CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+      <div id="timelineContainer" class="space-y-6"></div>
+    </main>
+
+  </div>
+
+  <!-- ==================== 4 DETAILED INTERACTIVE MODALS ==================== -->
+
+  <!-- MODAL 1: SHUTTLE BUS (接駁車專屬時刻表) -->
+  <div id="shuttleModal" class="modal-backdrop fixed inset-0 z-50 bg-forest-950/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 animate-fade-slide">
+      <div class="sticky top-0 bg-white border-b border-gray-100 p-5 flex items-center justify-between z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-van-shuttle"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-forest-950">阿里山閣大飯店接駁車專屬時刻表</h3>
+            <p class="text-xs text-gray-500">20人座白色中巴 ✕ 阿里山遊客中心 ⇋ 飯店正門（車程 6 分鐘）</p>
+          </div>
+        </div>
+        <button onclick="closeModal('shuttleModal')" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6 text-sm text-gray-700">
+        <!-- Call Out Box -->
+        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-xs font-bold text-emerald-900 block">停車指示：</span>
+            <span class="text-xs text-emerald-800">自用車請停「阿里山遊客中心大停車場」，攜帶過夜行李在遊客中心正門候車處等候。</span>
+          </div>
+          <a href="tel:052679611" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-phone"></i> 撥打櫃檯 (05-2679611)
+          </a>
+        </div>
+
+        <!-- Section A: Check-in Shuttles -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2.5 py-1 rounded-md bg-emerald-800 text-white text-xs font-extrabold">下午進房接駁</span>
+            <span class="text-xs font-bold text-gray-600">遊客中心 ➔ 飯店門口</span>
+          </div>
+          <p class="text-xs text-gray-500 mb-2">服務時段為 <strong>12:30 至 17:00</strong>，每 30 分鐘一班固定整點與半點發車：</p>
+          <div class="grid grid-cols-5 sm:grid-cols-5 gap-2 text-center font-mono font-bold text-xs">
+            <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">12:30</div>
+            <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">13:00</div>
+            <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">13:30</div>
+            <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">14:00</div>
+            <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">14:30</div>
+            <div class="p-2.5 bg-amberwood-50 border border-amberwood-300 rounded-xl text-amberwood-700 font-extrabold">15:00 推薦</div>
+            <div class="p-2.5 bg-amberwood-50 border border-amberwood-300 rounded-xl text-amberwood-700 font-extrabold">15:30 推薦</div>
+            <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">16:00</div>
+            <div class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-forest-900">16:30</div>
+            <div class="p-2.5 bg-rose-50 border border-rose-300 rounded-xl text-rose-700">17:00 末班</div>
+          </div>
+        </div>
+
+        <!-- Section B: Checkout Shuttles -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2.5 py-1 rounded-md bg-forest-900 text-white text-xs font-extrabold">上午退房接駁</span>
+            <span class="text-xs font-bold text-gray-600">飯店正門 ➔ 遊客中心停車場</span>
+          </div>
+          <p class="text-xs text-gray-500 mb-2">上午固定 8 個班次，請提前 5 分鐘於飯店大廳候車：</p>
+          <div class="grid grid-cols-4 sm:grid-cols-4 gap-2 text-center font-mono font-bold text-xs">
+            <div class="p-2 bg-gray-50 border border-gray-200 rounded-xl">07:30</div>
+            <div class="p-2 bg-gray-50 border border-gray-200 rounded-xl">08:00</div>
+            <div class="p-2 bg-gray-50 border border-gray-200 rounded-xl">08:40</div>
+            <div class="p-2 bg-gray-50 border border-gray-200 rounded-xl">09:20</div>
+            <div class="p-2.5 bg-amberwood-50 border border-amberwood-300 rounded-xl text-amberwood-700 font-extrabold">09:50 推薦</div>
+            <div class="p-2.5 bg-amberwood-50 border border-amberwood-300 rounded-xl text-amberwood-700 font-extrabold">10:30 推薦</div>
+            <div class="p-2 bg-gray-50 border border-gray-200 rounded-xl">11:00</div>
+            <div class="p-2 bg-rose-50 border border-rose-300 rounded-xl text-rose-700">11:30 末班</div>
+          </div>
+        </div>
+
+        <!-- Section C: Dinner Shuttles -->
+        <div class="bg-gray-50 rounded-2xl p-4 border border-gray-200">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-1 rounded-md bg-amberwood-600 text-white text-xs font-extrabold">晚間商店街用餐接駁</span>
+            <span class="text-xs font-bold text-gray-700">前往中正村商店街與山賓餐廳</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs mt-3">
+            <div class="bg-white p-3 rounded-xl border border-gray-200">
+              <span class="font-bold text-gray-900 block mb-1">去程（飯店 ➔ 遊客中心）：</span>
+              <div class="flex gap-2">
+                <span class="px-2 py-1 bg-amber-100 text-amber-900 font-bold rounded">18:00</span>
+                <span class="px-2 py-1 bg-amber-100 text-amber-900 font-bold rounded">19:00</span>
+              </div>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-gray-200">
+              <span class="font-bold text-gray-900 block mb-1">回程（遊客中心 ➔ 飯店）：</span>
+              <div class="flex gap-2">
+                <span class="px-2 py-1 bg-gray-200 font-bold rounded">18:15</span>
+                <span class="px-2 py-1 bg-gray-200 font-bold rounded">19:15</span>
+                <span class="px-2 py-1 bg-rose-100 text-rose-900 font-bold rounded">20:15 末班</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-[11px] text-gray-500 mt-2.5">★ <strong>重要叮嚀：</strong>清晨看日出期間（04:00~07:00）全區接駁車未營運，看日出請直接步行 3 分鐘至旁邊「沼平車站」搭火車，極為便利。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: ALISHAN HOUSE HOTEL & ROOMS (阿里山閣住宿與房型指南) -->
+  <div id="hotelModal" class="modal-backdrop fixed inset-0 z-50 bg-forest-950/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 animate-fade-slide">
+      <div class="sticky top-0 bg-white border-b border-gray-100 p-5 flex items-center justify-between z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-800 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-hotel"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-forest-950">阿里山閣大飯店 住宿與房型指南</h3>
+            <p class="text-xs text-gray-500">園區管制區內最幽靜的深居之宿 ✕ 背靠百年森林</p>
+          </div>
+        </div>
+        <button onclick="closeModal('hotelModal')" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6 text-sm text-gray-700">
+        <!-- Hotel Quick Specs -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+          <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
+            <div class="text-[11px] text-gray-500">辦理入住</div>
+            <div class="text-base font-extrabold text-forest-900 mt-0.5">15:00 後</div>
+          </div>
+          <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
+            <div class="text-[11px] text-gray-500">退房時間</div>
+            <div class="text-base font-extrabold text-forest-900 mt-0.5">11:00 前</div>
+          </div>
+          <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
+            <div class="text-[11px] text-gray-500">供餐方式</div>
+            <div class="text-base font-extrabold text-forest-900 mt-0.5">中西式自助早</div>
+          </div>
+          <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200">
+            <div class="text-[11px] text-emerald-700 font-bold">至沼平車站</div>
+            <div class="text-base font-extrabold text-emerald-900 mt-0.5">步行 2~3 分</div>
+          </div>
+        </div>
+
+        <!-- Room Comparison -->
+        <div>
+          <h4 class="text-sm font-extrabold text-gray-900 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-bed text-purple-600"></i> A棟木屋 ✕ B棟新改裝房型深度對比
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- B-Wing -->
+            <div class="border-2 border-emerald-500/80 bg-emerald-50/40 rounded-2xl p-4 relative">
+              <span class="absolute top-3 right-3 text-[10px] font-extrabold bg-emerald-700 text-white px-2 py-0.5 rounded-full">首選推薦</span>
+              <h5 class="font-extrabold text-forest-950 text-base">B棟（全新改裝館）</h5>
+              <p class="text-xs text-gray-600 mt-1">現代木質簡約風格，採光極佳，氛圍明亮舒適。</p>
+              <ul class="mt-3 space-y-1.5 text-xs text-gray-700">
+                <li class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-600"></i> 配備獨立冷暖空調/浴室暖風機</li>
+                <li class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-600"></i> 免治馬桶、乾濕分離衛浴</li>
+                <li class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-600"></i> 雙人/四人房型隔音大幅提升</li>
+              </ul>
+            </div>
+
+            <!-- A-Wing -->
+            <div class="border border-gray-200 bg-white rounded-2xl p-4">
+              <h5 class="font-extrabold text-gray-900 text-base">A棟（經典景觀館）</h5>
+              <p class="text-xs text-gray-600 mt-1">傳統經典木屋建築，保留濃厚的檜木復古韻味。</p>
+              <ul class="mt-3 space-y-1.5 text-xs text-gray-700">
+                <li class="flex items-center gap-1.5"><i class="fa-solid fa-check text-gray-500"></i> 空間寬敞，適合家庭團體同住</li>
+                <li class="flex items-center gap-1.5"><i class="fa-solid fa-check text-gray-500"></i> 窗外正對沼平公園山櫻林</li>
+                <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-exclamation text-amber-500"></i> 設施較為傳統古樸，附設電毯/電暖器</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Practical Location Advantages -->
+        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 text-xs leading-relaxed space-y-2">
+          <div class="font-bold text-gray-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-map-pin text-purple-700"></i> 阿里山閣絕佳位置優勢：
+          </div>
+          <p>1. <strong>日出特權</strong>：離沼平車站僅約 150 公尺，清晨完全不必大費周章在旅客中心搶排隊，清晨散步 3 分鐘即可進站上車。</p>
+          <p>2. <strong>步道起點</strong>：飯店後門即是「姊妹潭」步道入口，正門對面是「祝山觀日步道」終點，健行極為順暢。</p>
+          <p>3. <strong>聯絡資訊</strong>：地址：嘉義縣阿里山鄉香林村 1 號 ｜ 電話：<a href="tel:052679611" class="text-forest-700 font-bold underline">05-2679611</a>。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: SUNRISE ROUTE & OGASAWARA (小笠原山 360° 觀日路線) -->
+  <div id="sunriseModal" class="modal-backdrop fixed inset-0 z-50 bg-forest-950/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 animate-fade-slide">
+      <div class="sticky top-0 bg-white border-b border-gray-100 p-5 flex items-center justify-between z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-mountain-sun"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-forest-950">小笠原山 360° 觀日路線圖解</h3>
+            <p class="text-xs text-gray-500">避開祝山車站人潮 ✕ 迎玉山主峰萬丈金光</p>
+          </div>
+        </div>
+        <button onclick="closeModal('sunriseModal')" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6 text-sm text-gray-700">
+        <!-- Route Steps Diagram -->
+        <div class="space-y-4">
+          <!-- Step 1 -->
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-forest-900 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
+            <div>
+              <h5 class="font-bold text-gray-900">04:30~05:00 阿里山閣出發 ➔ 沼平車站（步行 3 分鐘）</h5>
+              <p class="text-xs text-gray-600 mt-0.5">飯店門口右轉沿木棧道緩步 3 分鐘直抵沼平車站，刷票搭乘開往祝山的清晨觀日小火車。</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-forest-900 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
+            <div>
+              <h5 class="font-bold text-gray-900">祝山線小火車直上海拔 2,451m 祝山站（車程約 25 分鐘）</h5>
+              <p class="text-xs text-gray-600 mt-0.5">穿過黑夜林海，抵達全台灣最高的鐵路車站「祝山車站」。</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-amberwood-500 text-forest-950 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
+            <div class="bg-amber-50 p-3.5 rounded-2xl border border-amberwood-200">
+              <h5 class="font-extrabold text-amberwood-900">祝山出站右轉 ➔ 小笠原山觀景台（步行約 10~15 分鐘）★關鍵秘技</h5>
+              <p class="text-xs text-amber-800 mt-1"><strong>不要停在祝山車站前平台人擠人！</strong>出站往右沿柏油小徑向上走約 500 公尺，抵達海拔 2,488 公尺的小笠原山。這裡擁有完全無死角的 360 度環景木棧平台，晨曦照耀玉山群峰與陳有蘭溪谷雲海，更是台灣特有國寶鳥「黑長尾雉（帝雉）」晨間覓食的棲地。</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
+            <div>
+              <h5 class="font-bold text-gray-900">日出後：祝山觀日步道下坡 ➔ 阿里山閣（步行約 35 分鐘）</h5>
+              <p class="text-xs text-gray-600 mt-0.5">不擠回程小火車！順著祝山觀日步道一路緩緩下坡，沿途沐浴在清晨針葉林金光與檜木芬多精中，步道終點正好直接回到阿里山閣門口，無縫銜接享用熱騰騰早餐！</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gear & Ticket Note -->
+        <div class="bg-gray-50 rounded-2xl p-4 border border-gray-200 text-xs space-y-2">
+          <div class="font-bold text-gray-900">觀日票券與保暖要點：</div>
+          <p>• <strong>車票購買</strong>：乘車前一天下午 16:30 可於阿里山車站 2 樓或林鐵官網預先購票（單程 NT$150 / 來回 NT$300）。</p>
+          <p>• <strong>防風保暖</strong>：觀日台無遮蔽物、清晨寒風刺骨，強烈建議穿著連帽防風外套、內層保暖毛衣、手套與毛帽。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: DINING & STORE STREET (商店街美食與實用資訊) -->
+  <div id="foodModal" class="modal-backdrop fixed inset-0 z-50 bg-forest-950/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 animate-fade-slide">
+      <div class="sticky top-0 bg-white border-b border-gray-100 p-5 flex items-center justify-between z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-orange-100 text-orange-800 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-forest-950">阿里山園區美食與商店街指南</h3>
+            <p class="text-xs text-gray-500">中正村旅館街 ✕ 阿里山車站商圈排隊名店推薦</p>
+          </div>
+        </div>
+        <button onclick="closeModal('foodModal')" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-5 text-sm text-gray-700">
+        <!-- Restaurant 1: 山賓餐廳 -->
+        <div class="p-4 bg-orange-50/50 rounded-2xl border border-orange-200">
+          <div class="flex items-center justify-between">
+            <h5 class="font-extrabold text-orange-950 text-base">山賓餐廳（30年在地招牌第一名）</h5>
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-orange-200 text-orange-900 font-bold">必吃排隊店</span>
+          </div>
+          <p class="text-xs text-gray-600 mt-1">位於阿里山郵局正對面。阿里山入夜極凍，最經典的就是這鍋現熬石頭火鍋！</p>
+          <div class="mt-2.5 text-xs text-gray-800">
+            <strong>招牌必點：</strong>
+            甘甜大白菜石頭火鍋、清炒阿里山轎篙筍、金針土雞湯、椒鹽杏鮑菇。
+          </div>
+          <p class="text-[11px] text-gray-500 mt-2">★ 提示：晚間 17:30~19:00 極易客滿，不接受電話預約，建議搭乘 18:00 接駁車抵達後直接排隊候位。</p>
+        </div>
+
+        <!-- Restaurant 2: 香姨小吃 -->
+        <div class="p-4 bg-gray-50 rounded-2xl border border-gray-200">
+          <div class="flex items-center justify-between">
+            <h5 class="font-extrabold text-gray-900 text-base">香姨小吃（娜若瑪菲美食商圈內）</h5>
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-gray-200 text-gray-800 font-bold">平價純樸好滋味</span>
+          </div>
+          <p class="text-xs text-gray-600 mt-1">如果不想吃大合菜，這裡的家常麵食與水餃是個人與小家庭的最佳選擇。</p>
+          <div class="mt-2 text-xs text-gray-800">
+            <strong>推薦菜色：</strong>
+            古早味滷肉飯（附大塊筍乾與滷蛋）、手工麵疙瘩、榨菜肉絲熱湯麵。
+          </div>
+        </div>
+
+        <!-- Practical 7-11 Supplies -->
+        <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs">
+          <div class="font-bold text-emerald-950 flex items-center gap-1.5 mb-1.5">
+            <i class="fa-solid fa-store text-emerald-700"></i> 全台海拔最高便利商店補給：
+          </div>
+          <p class="text-emerald-900">阿里山神木門市 7-ELEVEN（海拔 2,170m）位於商圈廣場。建議晚餐後順便購買：暖暖包、翌日清晨觀日隨身熱飲、巧克力零食及保溫瓶熱水，備妥翌日清晨體力！</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD / EDIT TIMELINE ITEM ==================== -->
+  <div id="itemModal" class="modal-backdrop fixed inset-0 z-50 bg-forest-950/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 animate-fade-slide">
+      <div class="sticky top-0 bg-white border-b border-gray-100 p-5 flex items-center justify-between z-10">
+        <h3 id="modalTitle" class="text-lg font-black text-forest-950">編輯行程站點</h3>
+        <button onclick="closeModal('itemModal')" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="itemForm" onsubmit="saveModalData(event)" class="p-6 space-y-4 text-xs">
+        <input type="hidden" id="editItemId" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">所屬日程</label>
+            <select id="fieldDay" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none">
+              <option value="1">Day 1：中和出發 ➔ 巨木之宿</option>
+              <option value="2">Day 2：小笠原日出 ➔ 隙頂雲海</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">抵達時間</label>
+            <input type="time" id="fieldTime" required class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">預計停留 (分)</label>
+            <input type="number" id="fieldDuration" min="5" step="5" required class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">站點標題</label>
+            <input type="text" id="fieldTitle" required placeholder="如：奮起湖老街" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">類型分類</label>
+            <select id="fieldType" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none">
+              <option value="transit">行車交通 / 休息</option>
+              <option value="dining">在地美食 / 午晚餐</option>
+              <option value="spot">景點巡禮 / 步道</option>
+              <option value="hotel">住宿入住 / 接駁</option>
+              <option value="sunrise">晨曦觀日 / 高山絕景</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">導航搜尋地點 / 完整地址</label>
+          <input type="text" id="fieldLocation" required placeholder="如：嘉義縣竹崎鄉奮起湖老街" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">精選照片 URL (可選)</label>
+          <input type="url" id="fieldImage" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">深度背景特色介紹</label>
+          <textarea id="fieldDesc" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none leading-relaxed" placeholder="介紹此站點的歷史背景、地理位置與體驗價值..."></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">必看必吃亮點清單 (每行一個)</label>
+          <textarea id="fieldHighlights" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" placeholder="現烤百年檜木甜甜圈&#10;奮起湖排骨便當"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">行前實用叮嚀 (Tip)</label>
+          <input type="text" id="fieldTip" placeholder="如：清晨氣溫接近 5°C，請穿防風羽絨衣與毛帽" class="w-full px-3 py-2 border border-gray-300 rounded-xl font-medium focus:ring-2 focus:ring-forest-700 focus:outline-none" />
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-gray-100">
+          <button type="button" onclick="closeModal('itemModal')" class="px-4 py-2 rounded-xl text-gray-600 hover:bg-gray-100 font-bold">取消</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold shadow-md">儲存站點變更</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- 完整預載資料集（含精美高解析圖片與真實文案） ---
+    const defaultItinerary = [
+      {
+        id: "d1_01",
+        day: 1,
+        time: "07:00",
+        duration: 90,
+        title: "新北中和啟程 ✕ 國道 3 號南下",
+        type: "transit",
+        image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80",
+        location: "新北市中和交流道",
+        desc: "清晨避開上班尖峰車潮，從中和交流道直上國道 3 號展開雙日自駕旅途。國 3 道路寬敞平整，沿途欣賞大漢溪與桃竹丘陵晨光，保持平穩車速一路南下。",
+        highlights: [
+          "建議出發前一晚加滿油箱並確認胎壓",
+          "準備輕快的高山自駕歌單提神"
+        ],
+        tip: "中和至泰安服務區約 125 公里，抓 1.5 小時順暢抵達。"
+      },
+      {
+        id: "d1_02",
+        day: 1,
+        time: "08:45",
+        duration: 30,
+        title: "泰安服務區（南下）舒展與熱咖啡補給",
+        type: "transit",
+        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80",
+        location: "國道一號泰安服務區",
+        desc: "作為中台灣最佳中繼站，泰安服務區擁有夢幻的白色積木星巴克與開闊綠意步道。全體下車走動伸展筋骨、使用洗手間並買杯現沖熱咖啡喚醒一整天的元氣。",
+        highlights: [
+          "積木造型星巴克打卡地標",
+          "熱咖啡與輕食隨車補給"
+        ],
+        tip: "休息約 30 分鐘，換手駕駛或活動雙腿防久坐疲勞。"
+      },
+      {
+        id: "d1_03",
+        day: 1,
+        time: "10:45",
+        duration: 40,
+        title: "阿里山門戶：旺萊山愛情大草原",
+        type: "spot",
+        image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+        location: "嘉義縣番路鄉觸口村車埕7號 (台18線32K)",
+        desc: "位於阿里山公路起點（觸口），在此正式向平原告別、準備盤山而上。遼闊無邊的綠意大草原點綴著浪漫地景藝術，可遠眺阿里山山脈前緣壯麗山稜。",
+        highlights: [
+          "免費品嚐一整塊現烤熱鳳梨酥與高山烏龍熱茶",
+          "在綠地大草原舒展筋骨、適應高度轉換"
+        ],
+        tip: "入山前最後平坦開闊腹地，乘客可在此服用防暈車物資。"
+      },
+      {
+        id: "d1_04",
+        day: 1,
+        time: "12:15",
+        duration: 75,
+        title: "奮起湖老街：鐵路便當與百年現烤甜甜圈",
+        type: "dining",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
+        location: "嘉義縣竹崎鄉中和村奮起湖",
+        desc: "海拔約 1,400 公尺的經典鐵道山城，因三面環山形如畚箕而得名。木造老車站、石階巷弄與百年肖楠林相互輝映，是入園前最重要的美食與心靈補給站。",
+        highlights: [
+          "百年檜木甜甜圈：外酥內軟、現烤濃郁奶香（建議抵達先取號碼牌）",
+          "經典奮起湖鐵路排骨/戰斧軟燒便當：滿滿懷舊木盒香",
+          "天然手洗野生檸檬愛玉、老老街街仔尾阿嬤草仔粿"
+        ],
+        tip: "奮起湖第一停車場車位有限，老街石階濕滑建議穿著健行鞋。"
+      },
+      {
+        id: "d1_05",
+        day: 1,
+        time: "14:45",
+        duration: 35,
+        title: "抵達阿里山遊客中心 ➔ 換搭阿里山閣白色中巴",
+        type: "hotel",
+        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
+        location: "阿里山國家森林遊樂區遊客中心停車場",
+        desc: "車輛駛入阿里山國家森林遊樂區大門售票處，依工作人員指引停放在遊客中心旁大停車場。收拾過夜行李至遊客中心前搭乘「阿里山閣大飯店」專屬 20 人座白色接駁中巴。",
+        highlights: [
+          "車程約 6 分鐘穿過森林管制區直達飯店大廳",
+          "接駁發車時間：12:30 ~ 17:00 每半小時一班（整點與半點發車）"
+        ],
+        tip: "若抵達候車處未見接駁車，可直接致電飯店櫃檯：05-2679611。"
+      },
+      {
+        id: "d1_06",
+        day: 1,
+        time: "15:20",
+        duration: 20,
+        title: "阿里山閣大飯店 Check-in 與整裝",
+        type: "hotel",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+        location: "阿里山閣大飯店 (沼平車站旁)",
+        desc: "全園區地理位置最幽靜的飯店，座落於沼平公園與林鐵支線旁，背靠千年巨木森林。辦理入住放好行李、稍作梳洗，帶上水壺與相機輕裝出發！",
+        highlights: [
+          "客房窗外即是滿窗冷杉與日式山櫻林景致",
+          "後門直通步道入口，免去外界車水馬龍喧鬧"
+        ],
+        tip: "櫃檯可確認翌日清晨祝山線觀日火車發車時刻與天氣預報。"
+      },
+      {
+        id: "d1_07",
+        day: 1,
+        time: "15:45",
+        duration: 105,
+        title: "巨木森林步道純下坡巡禮 ✕ 香林神木與小火車",
+        type: "spot",
+        image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80",
+        location: "阿里山巨木群棧道 & 神木車站",
+        desc: "從飯店後方出發的「完美下坡省力走法」：漫步至碧綠澄澈的姊妹潭、木蘭園，接續步入紅檜芬多精飄散的巨木群棧道，瞻仰樹齡超過 2,000 年的第二代「香林神木」與三代木，一路緩緩下坡抵達神木車站，搭乘古樸小火車返回阿里山站。",
+        highlights: [
+          "姊妹潭高山湖泊倒影與相思亭",
+          "香林神木：樹高 45 公尺、胸圍 12.3 公尺，震撼人心的千年歲月",
+          "神木車站搭乘末班森林小火車（車程 7 分鐘）直達阿里山車站"
+        ],
+        tip: "全程皆為平緩下坡木棧道與石階，膝蓋負擔極低，老人小孩皆能輕鬆走完。"
+      },
+      {
+        id: "d1_08",
+        day: 1,
+        time: "18:00",
+        duration: 90,
+        title: "商店街暖心晚餐：山賓餐廳石頭火鍋 ✕ 晚間補給",
+        type: "dining",
+        image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
+        location: "阿里山中正村商店街 (阿里山郵局對面)",
+        desc: "抵達阿里山車站後步入中正村商店街。高山入夜氣溫驟降至 10 度以下，最棒的享受莫過於品嚐開業 30 年名店「山賓餐廳」招牌甘甜石頭火鍋，配上現炒高山轎篙筍與山芹菜煎蛋。",
+        highlights: [
+          "山賓餐廳石頭火鍋：大白菜熬煮甘甜湯頭、鮮切肉片與山產豆腐",
+          "順道造訪全台最高 7-11 採買翌日清晨觀日保暖熱飲與小乾糧",
+          "搭乘 19:15 或 20:15（末班車）接駁專車舒適返回阿里山閣"
+        ],
+        tip: "山賓餐廳晚間極受歡迎不接受預約，建議一下火車立刻登記候位。"
+      },
+      {
+        id: "d2_01",
+        day: 2,
+        time: "04:45",
+        duration: 30,
+        title: "晨曦啟程：沼平車站搭乘祝山觀日小火車",
+        type: "sunrise",
+        image: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80",
+        location: "阿里山林鐵沼平車站",
+        desc: "阿里山閣最大特權——步行至沼平車站僅需 2~3 分鐘！穿好防風羽絨外套與毛帽，在星斗與冷冽純淨的空氣中搭上開往台灣鐵道最高點的祝山觀日小火車。",
+        highlights: [
+          "免去起大早從旅客中心排隊推擠，沼平站上車更悠閒",
+          "車程約 25 分鐘穿過黑夜原始森林直上海拔 2,451 公尺祝山站"
+        ],
+        tip: "高山清晨氣溫常在 4~8°C，毛帽、防風手套及圍巾為必備裝備。"
+      },
+      {
+        id: "d2_02",
+        day: 2,
+        time: "05:35",
+        duration: 75,
+        title: "小笠原山 360 度觀日台：迎破曉萬丈金光",
+        type: "sunrise",
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
+        location: "小笠原山觀景台 (海拔 2,488 公尺)",
+        desc: "祝山出站後避開月台人群，順著平緩柏油小徑右行約 10~15 分鐘至小笠原山觀景台。此處擁有全台最開闊的 360 度高山環景木造平台，能將玉山群峰、中央山脈、秀姑巒山與塔山雲海盡收眼底，更是台灣特有種帝雉晨間覓食的秘密基地。",
+        highlights: [
+          "晨曦金光破雲而出、照耀玉山主峰白雪/峭壁的屏息瞬間",
+          "運氣好可近距離偶遇台灣國寶「黑長尾雉（帝雉）」林間漫步",
+          "雲海翻騰於腳下八掌溪與陳有蘭溪谷之間"
+        ],
+        tip: "小笠原山風勢強勁，拍照時留意隨身手機與保暖防風。"
+      },
+      {
+        id: "d2_03",
+        day: 2,
+        time: "07:00",
+        duration: 90,
+        title: "祝山觀日步道漫步下山 ✕ 阿里山閣自助早餐",
+        type: "spot",
+        image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
+        location: "祝山觀日步道 ➔ 阿里山閣大飯店",
+        desc: "日出後不搭擁擠的回程火車，選擇順著祝山觀日步道伴隨晨光一路下坡健行（約 35 分鐘），沿途鳥語啁啾、冷杉挺拔，步道出口恰好直接接回阿里山閣大門！回飯店餐廳悠閒享用溫熱自助早餐與熱粥。",
+        highlights: [
+          "早晨最純淨的針葉林芬多精森林浴",
+          "回房沖個熱水澡、整理行李，在陽台再看一眼沼平森林景致"
+        ],
+        tip: "飯店退房時間為 11:00，可搭乘 09:50 或 10:30 接駁車返回停車場。"
+      },
+      {
+        id: "d2_04",
+        day: 2,
+        time: "11:30",
+        duration: 60,
+        title: "隙頂二延平步道：茶園天梯與象山巨石",
+        type: "spot",
+        image: "https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=800&q=80",
+        location: "嘉義縣番路鄉台18線53.5K (二延平步道)",
+        desc: "下山途中停靠台 18 線最負盛名的隙頂風景區。漫步於竹林與整齊層疊的梯田茶園木棧道上，對望宛如巨大巨象趴臥的「象山」，呼吸高山烏龍茶樹清香。",
+        highlights: [
+          "梯田茶園與木棧道縱深美景（IG 經典拍照點）",
+          "入口處生力農場或茶行品茗試喝阿里山高冷清香烏龍"
+        ],
+        tip: "台 18 線中午過後山嵐漸濃，行車請開近光燈或霧燈慢行。"
+      },
+      {
+        id: "d2_05",
+        day: 2,
+        time: "13:30",
+        duration: 210,
+        title: "中埔交流道北上 ➔ 賦歸新北中和",
+        type: "transit",
+        image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80",
+        location: "國道 3 號北上路段",
+        desc: "自中埔交流道直上國 3，中途停靠南投服務區或清水服務區稍事換手與休息。帶著滿滿的檜木能量、日出金光回憶與茶葉伴手禮，在傍晚平安返回溫暖的中和住家。",
+        highlights: [
+          "建議於南投服務區購買在地伴手禮",
+          "預計 17:30 ~ 18:00 順利返回中和，避開夜間大塞車"
+        ],
+        tip: "山路至國道速限轉換大，請注意國道測速照相並保持安全車距。"
+      }
+    ];
+
+    // State
+    let itineraryData = [];
+    let currentFilterDay = 'all';
+
+    // Type definition and badges
+    const typeMeta = {
+      transit: { label: "行車/休息", bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200", icon: "fa-car-side" },
+      dining:  { label: "在地美食", bg: "bg-amber-50", text: "text-amber-800", border: "border-amber-200", icon: "fa-utensils" },
+      spot:    { label: "景點步道", bg: "bg-emerald-50", text: "text-emerald-800", border: "border-emerald-200", icon: "fa-tree" },
+      hotel:   { label: "住宿接駁", bg: "bg-purple-50", text: "text-purple-800", border: "border-purple-200", icon: "fa-hotel" },
+      sunrise: { label: "晨曦日出", bg: "bg-amber-100", text: "text-amber-950", border: "border-amber-400", icon: "fa-sun" }
+    };
+
+    // Initialize
+    window.onload = function() {
+      loadState();
+      renderTimeline();
+    };
+
+    function loadState() {
+      // 1. URL Hash Check
+      if (window.location.hash && window.location.hash.length > 5) {
+        try {
+          const raw = window.location.hash.substring(1);
+          const decoded = decodeURIComponent(escape(atob(raw)));
+          itineraryData = JSON.parse(decoded);
+          showToast("已成功載入分享的自訂行程！", "fa-check");
+          return;
+        } catch(e) {
+          console.warn("無法解析網址 Hash，轉讀本地儲存", e);
+        }
+      }
+
+      // 2. LocalStorage Check
+      const local = localStorage.getItem("alishan_explorer_pro_v2");
+      if (local) {
+        try {
+          itineraryData = JSON.parse(local);
+          return;
+        } catch(e) {}
+      }
+
+      // 3. Fallback
+      itineraryData = JSON.parse(JSON.stringify(defaultItinerary));
+    }
+
+    function saveState() {
+      localStorage.setItem("alishan_explorer_pro_v2", JSON.stringify(itineraryData));
+    }
+
+    // Render Timeline with Images & Glow Effects
+    function renderTimeline() {
+      const container = document.getElementById("timelineContainer");
+      container.innerHTML = "";
+
+      const filtered = itineraryData.filter(item => {
+        if (currentFilterDay === 'all') return true;
+        return item.day === currentFilterDay;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16 bg-white rounded-3xl border border-dashed border-gray-300 p-8">
+            <i class="fa-solid fa-calendar-xmark text-4xl text-gray-400 mb-3"></i>
+            <p class="text-gray-500 font-medium">此日程目前沒有排定任何站點。</p>
+            <button onclick="openAddModal()" class="mt-4 px-4 py-2 rounded-xl bg-forest-800 text-white text-xs font-bold hover:bg-forest-900">
+              + 新增站點
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      let lastDaySeen = null;
+
+      filtered.forEach((item, index) => {
+        // Day Section Divider
+        if (currentFilterDay === 'all' && item.day !== lastDaySeen) {
+          lastDaySeen = item.day;
+          const divider = document.createElement("div");
+          divider.className = "pt-6 pb-2 flex items-center gap-3";
+          divider.innerHTML = `
+            <div class="px-5 py-2 rounded-2xl bg-forest-950 text-white font-extrabold text-sm flex items-center gap-2 shadow-sm border border-emerald-500/20">
+              <i class="fa-solid fa-mountain text-amberwood-400"></i> Day ${item.day} ${item.day === 1 ? '：中和出發 ➔ 阿里山森林巨木之宿' : '：小笠原 360° 萬丈晨曦 ➔ 隙頂雲海'}
+            </div>
+            <div class="h-[1px] flex-grow bg-gradient-to-r from-gray-300 to-transparent"></div>
+          `;
+          container.appendChild(divider);
+        }
+
+        const meta = typeMeta[item.type] || typeMeta.spot;
+        const isSunrise = item.type === 'sunrise';
+
+        const card = document.createElement("div");
+        card.className = `timeline-card bg-white rounded-3xl border ${isSunrise ? 'border-amberwood-400 ring-2 ring-amberwood-400/30' : 'border-gray-200'} shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col md:flex-row group`;
+        card.id = `card_${item.id}`;
+
+        const gmapQuery = encodeURIComponent(item.location || item.title);
+        const mapUrl = `https://www.google.com/maps/search/?api=1&query=${gmapQuery}`;
+
+        // Image container with fallback
+        const imgSrc = item.image || "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80";
+
+        card.innerHTML = `
+          <!-- Left Image Thumbnail -->
+          <div class="relative w-full md:w-64 lg:w-72 h-52 md:h-auto flex-shrink-0 overflow-hidden bg-gray-100">
+            <img 
+              src="${imgSrc}" 
+              alt="${item.title}" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              onerror="this.src='https://placehold.co/600x400/14532d/ffffff?text=${encodeURIComponent(item.title)}'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden"></div>
+            
+            <!-- Type Pill (Mobile Floating) -->
+            <div class="absolute top-3 left-3 flex items-center gap-2">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black shadow-md ${meta.bg} ${meta.text} border ${meta.border}">
+                <i class="fa-solid ${meta.icon} mr-1.5"></i> ${meta.label}
+              </span>
+            </div>
+
+            ${isSunrise ? `
+              <div class="absolute bottom-3 left-3 md:top-3 md:bottom-auto md:left-auto md:right-3 px-2.5 py-1 rounded-full bg-amberwood-500 text-forest-950 text-[10px] font-black uppercase tracking-wider shadow-lg flex items-center gap-1">
+                <i class="fa-solid fa-sun animate-spin" style="animation-duration: 8s;"></i> 晨曦破曉特選
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Right Content Body -->
+          <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between">
+            <div>
+              <!-- Time and Quick Actions -->
+              <div class="flex items-center justify-between gap-2 pb-2">
+                <div class="flex items-center gap-2 flex-wrap text-xs font-semibold text-gray-500">
+                  <span class="px-2.5 py-1 rounded-lg bg-gray-100 text-gray-700 font-mono font-bold">
+                    <i class="fa-regular fa-clock text-gray-400 mr-1"></i> ${item.time} 抵達
+                  </span>
+                  <span class="px-2.5 py-1 rounded-lg bg-gray-100 text-gray-700">
+                    <i class="fa-solid fa-hourglass-half text-gray-400 mr-1"></i> 停留約 ${item.duration} 分鐘
+                  </span>
+                </div>
+
+                <!-- Admin Action Tools -->
+                <div class="flex items-center gap-1 no-print">
+                  <button onclick="moveItem('${item.id}', -1)" class="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg text-xs" title="上移">
+                    <i class="fa-solid fa-arrow-up"></i>
+                  </button>
+                  <button onclick="moveItem('${item.id}', 1)" class="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg text-xs" title="下移">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </button>
+                  <button onclick="openEditModal('${item.id}')" class="p-1.5 text-gray-600 hover:text-forest-700 hover:bg-gray-100 rounded-lg text-xs font-bold ml-1">
+                    <i class="fa-solid fa-pen-to-square"></i> 編輯
+                  </button>
+                  <button onclick="deleteItem('${item.id}')" class="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg text-xs" title="刪除">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Title & Map Navigation -->
+              <div class="mt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <h3 class="text-lg sm:text-xl font-extrabold text-forest-950 tracking-tight">
+                  ${item.title}
+                </h3>
+                <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="text-xs text-forest-800 hover:text-forest-950 hover:underline flex items-center gap-1.5 font-bold bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200/80 self-start sm:self-auto transition">
+                  <i class="fa-solid fa-location-arrow text-red-500"></i> 導航路線
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+
+              <!-- Description -->
+              <p class="mt-3 text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
+                ${item.desc || '暫無描述。'}
+              </p>
+
+              <!-- Highlights Tags -->
+              ${item.highlights && item.highlights.length > 0 ? `
+                <div class="mt-3.5 bg-gray-50/80 rounded-2xl p-3 border border-gray-100">
+                  <div class="text-[11px] font-bold text-gray-900 mb-1.5 flex items-center gap-1.5">
+                    <i class="fa-solid fa-star text-amberwood-500 text-xs"></i> 核心看點 / 推薦體驗 (Highlights)：
+                  </div>
+                  <div class="flex flex-wrap gap-1.5">
+                    ${item.highlights.map(h => `
+                      <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 text-xs font-medium">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mr-1.5"></span>${h}
+                      </span>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+
+            <!-- Warning / Tips Footer -->
+            ${item.tip ? `
+              <div class="mt-4 pt-3 border-t border-gray-100 flex items-start gap-2 text-xs text-amber-950 bg-amber-50/70 px-3 py-2 rounded-xl border border-amber-200/60">
+                <i class="fa-solid fa-lightbulb text-amberwood-600 mt-0.5 flex-shrink-0"></i>
+                <div><strong>叮嚀：</strong> ${item.tip}</div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Tab Filters
+    function setDayFilter(day) {
+      currentFilterDay = day;
+      const btnAll = document.getElementById('tabAll');
+      const btnD1 = document.getElementById('tabDay1');
+      const btnD2 = document.getElementById('tabDay2');
+
+      const activeClass = "px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-forest-900 text-white shadow-sm";
+      const inactiveClass = "px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:text-forest-900 transition-all";
+
+      btnAll.className = day === 'all' ? activeClass : inactiveClass;
+      btnD1.className = day === 1 ? activeClass : inactiveClass;
+      btnD2.className = day === 2 ? activeClass : inactiveClass;
+
+      renderTimeline();
+    }
+
+    // Modal Manager
+    function openModal(modalId) {
+      const el = document.getElementById(modalId);
+      if (el) el.classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+      const el = document.getElementById(modalId);
+      if (el) el.classList.add('hidden');
+    }
+
+    // Auto Recalculate Time Timeline based on duration
+    function autoRecalculateTimeline() {
+      if (itineraryData.length <= 1) return;
+
+      let d1Start = null;
+      let d2Start = null;
+
+      for (let i = 0; i < itineraryData.length; i++) {
+        const item = itineraryData[i];
+        if (item.day === 1) {
+          if (!d1Start) {
+            d1Start = timeToMinutes(item.time);
+          } else {
+            const prev = itineraryData[i - 1];
+            item.time = minutesToTime(timeToMinutes(prev.time) + (parseInt(prev.duration) || 30));
+          }
+        } else if (item.day === 2) {
+          if (!d2Start) {
+            d2Start = timeToMinutes(item.time);
+          } else {
+            const prev = itineraryData[i - 1];
+            item.time = minutesToTime(timeToMinutes(prev.time) + (parseInt(prev.duration) || 30));
+          }
+        }
+      }
+
+      saveState();
+      renderTimeline();
+      showToast("已依據停留時長自動重新順延抵達時間！", "fa-clock");
+    }
+
+    function timeToMinutes(str) {
+      if (!str) return 0;
+      const [h, m] = str.split(":").map(Number);
+      return h * 60 + m;
+    }
+
+    function minutesToTime(totalMin) {
+      let norm = totalMin % (24 * 60);
+      const h = Math.floor(norm / 60);
+      const m = norm % 60;
+      return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    }
+
+    // Item Move
+    function moveItem(id, direction) {
+      const idx = itineraryData.findIndex(i => i.id === id);
+      if (idx === -1) return;
+      const targetIdx = idx + direction;
+      if (targetIdx < 0 || targetIdx >= itineraryData.length) return;
+
+      const temp = itineraryData[idx];
+      itineraryData[idx] = itineraryData[targetIdx];
+      itineraryData[targetIdx] = temp;
+
+      saveState();
+      renderTimeline();
+      showToast("已調整站點順序", "fa-arrow-down-up-across-line");
+    }
+
+    // Item Delete
+    function deleteItem(id) {
+      const target = itineraryData.find(i => i.id === id);
+      if (!target) return;
+      itineraryData = itineraryData.filter(i => i.id !== id);
+      saveState();
+      renderTimeline();
+      showToast(`已刪除「${target.title}」`, "fa-trash-can");
+    }
+
+    // Add Modal Open
+    function openAddModal() {
+      document.getElementById('modalTitle').innerText = "新增行程站點";
+      document.getElementById('editItemId').value = "";
+      document.getElementById('fieldDay').value = currentFilterDay === 2 ? "2" : "1";
+      document.getElementById('fieldTime').value = "12:00";
+      document.getElementById('fieldDuration').value = "60";
+      document.getElementById('fieldTitle').value = "";
+      document.getElementById('fieldType').value = "spot";
+      document.getElementById('fieldLocation').value = "";
+      document.getElementById('fieldImage').value = "";
+      document.getElementById('fieldDesc').value = "";
+      document.getElementById('fieldHighlights').value = "";
+      document.getElementById('fieldTip').value = "";
+      openModal('itemModal');
+    }
+
+    // Edit Modal Open
+    function openEditModal(id) {
+      const item = itineraryData.find(i => i.id === id);
+      if (!item) return;
+
+      document.getElementById('modalTitle').innerText = "編輯行程站點";
+      document.getElementById('editItemId').value = item.id;
+      document.getElementById('fieldDay').value = item.day;
+      document.getElementById('fieldTime').value = item.time;
+      document.getElementById('fieldDuration').value = item.duration;
+      document.getElementById('fieldTitle').value = item.title;
+      document.getElementById('fieldType').value = item.type;
+      document.getElementById('fieldLocation').value = item.location;
+      document.getElementById('fieldImage').value = item.image || "";
+      document.getElementById('fieldDesc').value = item.desc || "";
+      document.getElementById('fieldHighlights').value = (item.highlights || []).join("\n");
+      document.getElementById('fieldTip').value = item.tip || "";
+
+      openModal('itemModal');
+    }
+
+    // Save Modal
+    function saveModalData(e) {
+      e.preventDefault();
+      const id = document.getElementById('editItemId').value;
+      const day = parseInt(document.getElementById('fieldDay').value);
+      const time = document.getElementById('fieldTime').value;
+      const duration = parseInt(document.getElementById('fieldDuration').value) || 30;
+      const title = document.getElementById('fieldTitle').value.trim();
+      const type = document.getElementById('fieldType').value;
+      const location = document.getElementById('fieldLocation').value.trim();
+      const image = document.getElementById('fieldImage').value.trim();
+      const desc = document.getElementById('fieldDesc').value.trim();
+      const rawHighlights = document.getElementById('fieldHighlights').value.trim();
+      const highlights = rawHighlights ? rawHighlights.split("\n").map(s => s.trim()).filter(Boolean) : [];
+      const tip = document.getElementById('fieldTip').value.trim();
+
+      if (id) {
+        const idx = itineraryData.findIndex(i => i.id === id);
+        if (idx !== -1) {
+          itineraryData[idx] = { ...itineraryData[idx], day, time, duration, title, type, location, image, desc, highlights, tip };
+          showToast("站點資訊已成功更新！", "fa-check");
+        }
+      } else {
+        itineraryData.push({
+          id: "custom_" + Date.now(),
+          day, time, duration, title, type, location, image, desc, highlights, tip
+        });
+        showToast("已成功建立新站點！", "fa-plus");
+      }
+
+      saveState();
+      closeModal('itemModal');
+      renderTimeline();
+    }
+
+    // Share link by generating Base64 encoded JSON in the hash
+    function sharePlan() {
+      try {
+        const json = JSON.stringify(itineraryData);
+        const encoded = btoa(unescape(encodeURIComponent(json)));
+        const url = `${window.location.origin}${window.location.pathname}#${encoded}`;
+
+        const input = document.createElement("input");
+        document.body.appendChild(input);
+        input.value = url;
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+
+        showToast("分享連結已成功複製！好友打開即可同步看到這份行程。", "fa-link");
+      } catch (err) {
+        console.error(err);
+        showToast("複製失敗，請手動複製網址列 Hash。", "fa-triangle-exclamation");
+      }
+    }
+
+    // Reset default plan
+    function resetDefaultPlan() {
+      itineraryData = JSON.parse(JSON.stringify(defaultItinerary));
+      localStorage.removeItem("alishan_explorer_pro_v2");
+      window.history.replaceState(null, null, window.location.pathname);
+      renderTimeline();
+      showToast("已重設為經典雙日推薦行程！", "fa-rotate-left");
+    }
+
+    // Toast helper
+    function showToast(msg, icon = "fa-circle-check") {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toastMsg");
+      const toastIcon = document.getElementById("toastIcon");
+
+      toastMsg.innerText = msg;
+      toastIcon.className = `fa-solid ${icon}`;
+
+      toast.classList.remove("translate-y-28", "opacity-0");
+      toast.classList.add("translate-y-0", "opacity-100");
+
+      setTimeout(() => {
+        toast.classList.remove("translate-y-0", "opacity-100");
+        toast.classList.add("translate-y-28", "opacity-0");
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
