@@ -176,9 +176,9 @@
         <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-100 ease-in-out bg-cover bg-center"
              style="background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=2160&q=90');">
         </div>
-        <!-- Slide 2: Real Giant Ancient Cypress Tree Boardwalk -->
+        <!-- Slide 2: Real Bright Giant Ancient Cypress Tree with Sunbeams -->
         <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 ease-in-out bg-cover bg-center"
-             style="background-image: url('https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=2160&q=90');">
+             style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2160&q=90');">
         </div>
         <!-- Slide 3: Classic Red Forest Railway Train through Mountain Woods -->
         <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 ease-in-out bg-cover bg-center"
@@ -248,12 +248,16 @@
           </div>
         </button>
       </div>
-
     </header>
 
-    <!-- ==================== 2. MAIN CONTENT AREA (深色神木底圖 ✕ 高對比淺色卡片) ==================== -->
-    <div id="mainContent" class="relative z-20 flex-grow bg-[#0d131a] bg-cover bg-fixed bg-center"
-         style="background-image: linear-gradient(to bottom, #0d131a 0%, rgba(13, 19, 26, 0.94) 15%, rgba(13, 19, 26, 0.94) 85%, #0d131a 100%), url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2160&q=80');">
+    <!-- ==================== 2. MAIN CONTENT AREA (多層次高山森林光暈背景 ✕ 淺色邊框卡片) ==================== -->
+    <div id="mainContent" class="relative z-20 flex-grow bg-[#111721] bg-cover bg-fixed bg-center"
+         style="background-image: 
+           radial-gradient(ellipse 80% 50% at 50% -10%, rgba(217, 119, 6, 0.16) 0%, transparent 60%),
+           radial-gradient(circle 600px at 15% 35%, rgba(16, 185, 129, 0.10) 0%, transparent 65%),
+           radial-gradient(circle 500px at 85% 65%, rgba(59, 130, 246, 0.10) 0%, transparent 65%),
+           linear-gradient(to bottom, rgba(17, 23, 33, 0.88) 0%, rgba(15, 20, 28, 0.92) 50%, rgba(13, 17, 24, 0.95) 100%),
+           url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2160&q=80');">
 
       <!-- FULL-WIDTH (100% EDGE-TO-EDGE) HINOKI BOARDWALK 16-BIT PIXEL FAMILY WALKING RIBBON -->
       <div id="pixelBoardwalkRibbon" class="w-full relative z-30 bg-[#251e18] border-y border-amber-900/60 overflow-hidden select-none py-3 shadow-2xl no-print">
@@ -394,107 +398,109 @@
         </div>
       </div>
 
-      <!-- DASHBOARD: WEATHER, TRANSIT & 5 MODALS TILES (HIGH CONTRAST PURE WHITE CARDS) -->
-      <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+      <!-- DASHBOARD: WEATHER, TRANSIT & 5 MODALS TILES (溫潤柔和高山霧白過渡區，告別突兀死黑) -->
+      <section class="relative z-20 bg-gradient-to-b from-[#f7f5f0]/95 via-[#f0ede6]/90 to-transparent pt-7 pb-10 border-b border-white/10 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Live Mountain Conditions Banner -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mb-6">
-          <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-md flex flex-col justify-between text-stone-900">
-            <div>
-              <div class="text-[11px] font-bold text-blue-700 flex items-center gap-1.5">
-                <i class="fa-solid fa-temperature-arrow-down"></i> 1月下旬氣溫預報
+          <!-- Live Mountain Conditions Banner -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mb-6">
+            <div class="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-stone-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between text-stone-900">
+              <div>
+                <div class="text-[11px] font-bold text-blue-700 flex items-center gap-1.5">
+                  <i class="fa-solid fa-temperature-arrow-down"></i> 1月下旬氣溫預報
+                </div>
+                <div class="text-base sm:text-lg font-black text-gray-900 mt-1">清晨 0°C ~ 6°C</div>
+                <div class="text-[10px] text-stone-500 mt-0.5 font-medium">高山體感逼近零度，毛帽手套必備</div>
               </div>
-              <div class="text-base sm:text-lg font-black text-gray-900 mt-1">清晨 0°C ~ 6°C</div>
-              <div class="text-[10px] text-stone-500 mt-0.5">高山體感逼近零度，毛帽手套必備</div>
+              <a href="https://www.cwa.gov.tw/V8/C/L/NatForest/NatForest.html?PID=E001" target="_blank" rel="noopener noreferrer" class="mt-2.5 text-[11px] text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1">
+                氣象署一週天氣預報 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+              </a>
             </div>
-            <a href="https://www.cwa.gov.tw/V8/C/L/NatForest/NatForest.html?PID=E001" target="_blank" rel="noopener noreferrer" class="mt-2.5 text-[11px] text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1">
-              氣象署一週天氣預報 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-            </a>
+
+            <div class="bg-amber-50/90 backdrop-blur-md rounded-2xl p-4 border-2 border-amber-400 shadow-sm hover:shadow-md transition-all flex flex-col justify-between text-stone-900">
+              <div>
+                <div class="text-[11px] font-bold text-amber-800 flex items-center gap-1.5">
+                  <i class="fa-solid fa-sun"></i> 1/29 日出時間
+                </div>
+                <div class="text-base sm:text-lg font-black text-amber-950 mt-1">約 06:48 破曉</div>
+                <div class="text-[10px] text-amber-800/80 mt-0.5 font-medium">前日 16:30 公告祝山小火車班次</div>
+              </div>
+              <a href="https://www.cwa.gov.tw/V8/C/K/astronomy_daylight.html" target="_blank" rel="noopener noreferrer" class="mt-2.5 text-[11px] text-amber-900 hover:text-black font-extrabold flex items-center gap-1">
+                氣象署日出時刻表查詢 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+              </a>
+            </div>
+
+            <div class="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-stone-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between text-stone-900">
+              <div>
+                <div class="text-[11px] font-bold text-rose-700 flex items-center gap-1.5">
+                  <i class="fa-solid fa-train"></i> 祝山線觀日車票
+                </div>
+                <div class="text-base sm:text-lg font-black text-gray-900 mt-1">沼平 ➔ 祝山</div>
+                <div class="text-[10px] text-stone-500 mt-0.5 font-medium">建議前一日先在車站或網路取票</div>
+              </div>
+              <a href="https://afrch.forest.gov.tw/0000300" target="_blank" rel="noopener noreferrer" class="mt-2.5 text-[11px] text-rose-700 hover:text-rose-900 font-bold flex items-center gap-1">
+                阿里山林鐵訂票/時刻表 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+              </a>
+            </div>
+
+            <div class="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-stone-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between text-stone-900">
+              <div>
+                <div class="text-[11px] font-bold text-emerald-700 flex items-center gap-1.5">
+                  <i class="fa-solid fa-van-shuttle"></i> 阿里山閣接駁專車
+                </div>
+                <div class="text-base sm:text-lg font-black text-emerald-900 mt-1">12:30 ~ 17:00</div>
+                <div class="text-[10px] text-emerald-700/80 mt-0.5 font-medium">遊客中心候車 每半小時一班</div>
+              </div>
+              <a href="tel:052679611" class="mt-2.5 text-[11px] text-emerald-800 hover:text-emerald-950 font-bold flex items-center gap-1">
+                一鍵撥打櫃檯 05-2679611 <i class="fa-solid fa-phone text-[9px]"></i>
+              </a>
+            </div>
           </div>
 
-          <div class="bg-white rounded-2xl p-4 border-2 border-amber-400 shadow-md flex flex-col justify-between text-stone-900">
-            <div>
-              <div class="text-[11px] font-bold text-amber-700 flex items-center gap-1.5">
-                <i class="fa-solid fa-sun"></i> 1/29 日出時間
+          <!-- 5 Interactive Quick Action Dock Buttons -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 no-print">
+            <button onclick="openModal('checklistModal')" class="p-3.5 rounded-2xl bg-white hover:bg-emerald-50 border-2 border-emerald-500 text-left transition-all group hover:shadow-lg active:scale-95 col-span-2 sm:col-span-1 shadow-sm">
+              <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-sm mb-2 group-hover:scale-105 transition shadow-xs">
+                <i class="fa-solid fa-clipboard-check"></i>
               </div>
-              <div class="text-base sm:text-lg font-black text-amber-900 mt-1">約 06:48 破曉</div>
-              <div class="text-[10px] text-amber-700 mt-0.5">前日 16:30 公告祝山小火車班次</div>
-            </div>
-            <a href="https://www.cwa.gov.tw/V8/C/K/astronomy_daylight.html" target="_blank" rel="noopener noreferrer" class="mt-2.5 text-[11px] text-amber-800 hover:text-amber-950 font-bold flex items-center gap-1">
-              氣象署日出時刻表查詢 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-            </a>
+              <h4 class="text-xs sm:text-sm font-black text-emerald-950">🎒 親子抗寒清單</h4>
+              <p class="text-[11px] text-emerald-700 mt-0.5 font-bold">手機自動保存打勾 ➔</p>
+            </button>
+
+            <button onclick="openModal('shuttleModal')" class="p-3.5 rounded-2xl bg-white hover:bg-blue-50 border border-stone-200/90 text-left transition-all group hover:shadow-lg active:scale-95 shadow-sm">
+              <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-sm mb-2 group-hover:bg-blue-600 group-hover:text-white transition shadow-xs">
+                <i class="fa-solid fa-van-shuttle"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-gray-900 group-hover:text-blue-700 transition">接駁車專屬時刻表</h4>
+              <p class="text-[11px] text-stone-500 mt-0.5 font-medium">進退房與晚間用餐接送 ➔</p>
+            </button>
+
+            <button onclick="openModal('hotelModal')" class="p-3.5 rounded-2xl bg-white hover:bg-purple-50 border border-stone-200/90 text-left transition-all group hover:shadow-lg active:scale-95 shadow-sm">
+              <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-sm mb-2 group-hover:bg-purple-600 group-hover:text-white transition shadow-xs">
+                <i class="fa-solid fa-hotel"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-gray-900 group-hover:text-purple-700 transition">阿里山閣住宿＆房型</h4>
+              <p class="text-[11px] text-stone-500 mt-0.5 font-medium">A/B棟對比與一鍵撥號 ➔</p>
+            </button>
+
+            <button onclick="openModal('sunriseModal')" class="p-3.5 rounded-2xl bg-white hover:bg-amber-50 border-2 border-amber-400 text-left transition-all group hover:shadow-lg active:scale-95 shadow-sm">
+              <div class="w-8 h-8 rounded-xl bg-amber-500 text-stone-950 flex items-center justify-center text-sm mb-2 group-hover:bg-amber-600 transition shadow-xs">
+                <i class="fa-solid fa-mountain-sun"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-black text-amber-950">小笠原 360° 觀日路線</h4>
+              <p class="text-[11px] text-amber-800 mt-0.5 font-bold">避開人潮純下坡動線圖 ➔</p>
+            </button>
+
+            <button onclick="openModal('foodModal')" class="p-3.5 rounded-2xl bg-white hover:bg-rose-50 border border-stone-200/90 text-left transition-all group hover:shadow-lg active:scale-95 shadow-sm">
+              <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-sm mb-2 group-hover:bg-rose-600 group-hover:text-white transition shadow-xs">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-gray-900 group-hover:text-rose-700 transition">商店街美食指南</h4>
+              <p class="text-[11px] text-stone-500 mt-0.5 font-medium">山賓火鍋與在地補給地圖 ➔</p>
+            </button>
           </div>
 
-          <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-md flex flex-col justify-between text-stone-900">
-            <div>
-              <div class="text-[11px] font-bold text-rose-700 flex items-center gap-1.5">
-                <i class="fa-solid fa-train"></i> 祝山線觀日車票
-              </div>
-              <div class="text-base sm:text-lg font-black text-gray-900 mt-1">沼平 ➔ 祝山</div>
-              <div class="text-[10px] text-stone-500 mt-0.5">建議前一日先在車站或網路取票</div>
-            </div>
-            <a href="https://afrch.forest.gov.tw/0000300" target="_blank" rel="noopener noreferrer" class="mt-2.5 text-[11px] text-rose-700 hover:text-rose-900 font-bold flex items-center gap-1">
-              阿里山林鐵訂票/時刻表 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-            </a>
-          </div>
-
-          <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-md flex flex-col justify-between text-stone-900">
-            <div>
-              <div class="text-[11px] font-bold text-emerald-700 flex items-center gap-1.5">
-                <i class="fa-solid fa-van-shuttle"></i> 阿里山閣接駁專車
-              </div>
-              <div class="text-base sm:text-lg font-black text-emerald-900 mt-1">12:30 ~ 17:00</div>
-              <div class="text-[10px] text-emerald-700 mt-0.5">遊客中心候車 每半小時一班</div>
-            </div>
-            <a href="tel:052679611" class="mt-2.5 text-[11px] text-emerald-800 hover:text-emerald-950 font-bold flex items-center gap-1">
-              一鍵撥打櫃檯 05-2679611 <i class="fa-solid fa-phone text-[9px]"></i>
-            </a>
-          </div>
         </div>
-
-        <!-- 5 Interactive Quick Action Dock Buttons -->
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 no-print">
-          <button onclick="openModal('checklistModal')" class="p-3.5 rounded-2xl bg-white hover:bg-emerald-50 border-2 border-emerald-500 text-left transition-all group hover:shadow-lg active:scale-95 col-span-2 sm:col-span-1 shadow-md">
-            <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-sm mb-2 group-hover:scale-105 transition">
-              <i class="fa-solid fa-clipboard-check"></i>
-            </div>
-            <h4 class="text-xs sm:text-sm font-extrabold text-emerald-900">🎒 親子抗寒清單</h4>
-            <p class="text-[11px] text-emerald-700 mt-0.5 font-bold">手機自動保存打勾 ➔</p>
-          </button>
-
-          <button onclick="openModal('shuttleModal')" class="p-3.5 rounded-2xl bg-white hover:bg-blue-50 border border-stone-200 text-left transition-all group hover:shadow-lg active:scale-95 shadow-md">
-            <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-sm mb-2 group-hover:bg-blue-600 group-hover:text-white transition">
-              <i class="fa-solid fa-van-shuttle"></i>
-            </div>
-            <h4 class="text-xs sm:text-sm font-extrabold text-gray-900 group-hover:text-blue-700 transition">接駁車專屬時刻表</h4>
-            <p class="text-[11px] text-stone-500 mt-0.5">進退房與晚間用餐接送 ➔</p>
-          </button>
-
-          <button onclick="openModal('hotelModal')" class="p-3.5 rounded-2xl bg-white hover:bg-purple-50 border border-stone-200 text-left transition-all group hover:shadow-lg active:scale-95 shadow-md">
-            <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-sm mb-2 group-hover:bg-purple-600 group-hover:text-white transition">
-              <i class="fa-solid fa-hotel"></i>
-            </div>
-            <h4 class="text-xs sm:text-sm font-extrabold text-gray-900 group-hover:text-purple-700 transition">阿里山閣住宿＆房型</h4>
-            <p class="text-[11px] text-stone-500 mt-0.5">A/B棟對比與一鍵撥號 ➔</p>
-          </button>
-
-          <button onclick="openModal('sunriseModal')" class="p-3.5 rounded-2xl bg-white hover:bg-amber-50 border-2 border-amber-400 text-left transition-all group hover:shadow-lg active:scale-95 shadow-md">
-            <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center text-sm mb-2 group-hover:bg-amber-600 transition">
-              <i class="fa-solid fa-mountain-sun"></i>
-            </div>
-            <h4 class="text-xs sm:text-sm font-extrabold text-amber-950">小笠原 360° 觀日路線</h4>
-            <p class="text-[11px] text-amber-700 mt-0.5 font-bold">避開人潮純下坡動線圖 ➔</p>
-          </button>
-
-          <button onclick="openModal('foodModal')" class="p-3.5 rounded-2xl bg-white hover:bg-rose-50 border border-stone-200 text-left transition-all group hover:shadow-lg active:scale-95 shadow-md">
-            <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-sm mb-2 group-hover:bg-rose-600 group-hover:text-white transition">
-              <i class="fa-solid fa-utensils"></i>
-            </div>
-            <h4 class="text-xs sm:text-sm font-extrabold text-gray-900 group-hover:text-rose-700 transition">商店街美食指南</h4>
-            <p class="text-[11px] text-stone-500 mt-0.5">山賓火鍋與在地補給地圖 ➔</p>
-          </button>
-        </div>
-
       </section>
 
       <!-- STICKY ACTION & DAY SELECTOR BAR (WITH DISTINCT DAY COLOR THEMES) -->
@@ -999,7 +1005,7 @@
       sunrise: { label: '晨曦日出 / 破曉', bg: 'bg-rose-600', text: 'text-white', border: 'border-rose-400', icon: 'fa-sun' },
     };
 
-    // Day Color Theme Definitions
+    // Day Color Theme Definitions (邊框改為清爽柔和淺色系)
     const dayThemeMap = {
       1: {
         name: "1/28 (三) Day 1：中和 ➔ 奮起湖老街 ➔ 阿里山閣森林之宿",
@@ -1008,8 +1014,8 @@
         badgeText: "text-white",
         lightBg: "bg-blue-50",
         darkText: "text-blue-900",
-        borderAccent: "border-blue-500",
-        ringAccent: "ring-2 ring-blue-500/20",
+        borderAccent: "border-blue-200/80 hover:border-blue-300",
+        cardAccentBar: "bg-blue-500",
         icon: "fa-train"
       },
       2: {
@@ -1019,8 +1025,8 @@
         badgeText: "text-stone-950 font-black",
         lightBg: "bg-amber-50",
         darkText: "text-amber-900",
-        borderAccent: "border-amber-400",
-        ringAccent: "ring-2 ring-amber-400/40",
+        borderAccent: "border-amber-200/90 hover:border-amber-300",
+        cardAccentBar: "bg-amber-500",
         icon: "fa-sun"
       },
       3: {
@@ -1030,8 +1036,8 @@
         badgeText: "text-white",
         lightBg: "bg-emerald-50",
         darkText: "text-emerald-900",
-        borderAccent: "border-emerald-500",
-        ringAccent: "ring-2 ring-emerald-500/20",
+        borderAccent: "border-emerald-200/80 hover:border-emerald-300",
+        cardAccentBar: "bg-emerald-600",
         icon: "fa-leaf"
       }
     };
@@ -1246,7 +1252,7 @@
         title: "巨木群棧道巡禮 ➔ 香林神木 ➔ 神木車站",
         type: "spot",
         location: "嘉義縣阿里山鄉巨木群棧道",
-        image: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80",
         desc: "由飯店後方出發順行下坡：姊妹潭 ➔ 巨木群棧道 ➔ 香林神木 ➔ 樹靈塔 ➔ 抵達神木車站搭小火車返回。",
         highlights: ["仰望樹齡超過兩千年的香林神木", "36 株編號列管千年巨大紅檜林", "神木車站搭乘經典檜木車廂小火車回阿里山站"],
         tip: "由上往下的純下坡動線，老人與小孩走起來完全不費力，免去逆向爬階梯的喘息疲累。",
@@ -1472,19 +1478,23 @@
 
       defaultChecklistCategories.forEach((cat) => {
         const catBox = document.createElement("div");
-        catBox.className = "bg-white p-4 rounded-2xl border border-stone-200 shadow-sm";
+        catBox.className = "bg-white p-4 sm:p-5 rounded-2xl border border-stone-200 shadow-sm";
 
         let itemsHtml = cat.items.map(item => {
           const checked = !!checklistState[item.id];
           return `
-            <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-stone-50 cursor-pointer transition select-none">
+            <label class="flex items-start gap-2.5 p-2.5 rounded-xl border transition-all cursor-pointer select-none ${
+              checked 
+                ? 'bg-stone-50 border-stone-200/80 opacity-60' 
+                : 'bg-white border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/40 shadow-xs'
+            }">
               <input 
                 type="checkbox" 
-                class="w-4 h-4 mt-0.5 rounded text-forest-700 focus:ring-forest-500 border-stone-300 accent-emerald-600 cursor-pointer"
+                class="w-4 h-4 mt-0.5 rounded text-forest-700 focus:ring-forest-500 border-stone-300 accent-emerald-600 cursor-pointer flex-shrink-0"
                 onchange="toggleChecklistItem('${item.id}')"
                 ${checked ? 'checked' : ''}
               />
-              <span class="text-xs sm:text-sm font-medium ${checked ? 'line-through text-stone-400 font-normal' : 'text-stone-800'}">
+              <span class="text-xs leading-snug font-medium ${checked ? 'line-through text-stone-400 font-normal' : 'text-stone-800 font-bold'}">
                 ${item.label}
               </span>
             </label>
@@ -1492,10 +1502,13 @@
         }).join('');
 
         catBox.innerHTML = `
-          <h4 class="text-xs sm:text-sm font-black text-gray-900 mb-2 flex items-center gap-2">
-            <i class="fa-solid ${cat.icon} text-forest-700"></i> ${cat.category}
+          <h4 class="text-xs sm:text-sm font-black text-gray-900 mb-3 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">
+              <i class="fa-solid ${cat.icon}"></i>
+            </span>
+            ${cat.category}
           </h4>
-          <div class="space-y-1">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             ${itemsHtml}
           </div>
         `;
@@ -1556,9 +1569,12 @@
     function repairImages(data) {
       if (!Array.isArray(data)) return;
       let repaired = false;
+      const validGiantTree = "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80";
+      const validTrain = "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80";
+
       data.forEach(item => {
-        if (item.image && (item.image.includes("photo-1508873696983") || item.image.trim() === "")) {
-          item.image = "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80";
+        if (item.image && (item.image.includes("photo-1511497584788") || item.image.includes("photo-1508873696983") || item.image.trim() === "")) {
+          item.image = (item.type === 'transit') ? validTrain : validGiantTree;
           repaired = true;
         }
       });
@@ -1613,7 +1629,7 @@
             <div class="px-5 py-2.5 rounded-2xl ${theme.badgeBg} ${theme.badgeText} font-black text-sm flex items-center gap-2.5 shadow-lg border border-white/20">
               <i class="fa-solid ${theme.icon}"></i> ${theme.name}
             </div>
-            <div class="h-[1px] flex-grow bg-gradient-to-r from-stone-600 to-transparent"></div>
+            <div class="h-[1px] flex-grow bg-gradient-to-r from-stone-600/70 via-stone-500/30 to-transparent"></div>
           `;
           container.appendChild(divider);
         }
@@ -1622,26 +1638,29 @@
         const isSunrise = item.type === 'sunrise';
 
         const card = document.createElement("div");
-        card.className = `timeline-card bg-white rounded-3xl border-2 ${theme.borderAccent} ${theme.ringAccent} shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col md:flex-row group text-stone-900`;
+        card.className = `timeline-card relative bg-white rounded-3xl border ${theme.borderAccent} shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col md:flex-row group text-stone-900`;
         card.id = `card_${item.id}`;
 
         const gmapQuery = encodeURIComponent(item.location || item.title);
         const mapUrl = `https://www.google.com/maps/search/?api=1&query=${gmapQuery}`;
-        const imgSrc = item.image || "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=800&q=80";
+        const imgSrc = item.image || "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80";
 
         card.innerHTML = `
+          <!-- Top / Left Subtle Day Color Accent Bar -->
+          <div class="absolute top-0 left-0 right-0 h-1 md:h-full md:w-1.5 ${theme.cardAccentBar} z-10"></div>
+
           <!-- Left Image Thumbnail -->
           <div class="relative w-full md:w-64 lg:w-72 h-52 md:h-auto flex-shrink-0 overflow-hidden bg-stone-100">
             <img 
               src="${imgSrc}" 
               alt="${item.title}" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80';"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80';"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:hidden"></div>
             
             <div class="absolute top-3 left-3 flex items-center gap-2">
-              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black shadow-md ${meta.bg} ${meta.text} border ${meta.border} backdrop-blur-md">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black shadow-md ${meta.bg} ${meta.text} border border-white/20 backdrop-blur-md">
                 <i class="fa-solid ${meta.icon} mr-1.5"></i> ${meta.label}
               </span>
             </div>
@@ -1658,14 +1677,14 @@
           </div>
 
           <!-- Right Content Body -->
-          <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between bg-white text-stone-900">
+          <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between bg-white text-stone-900 md:pl-7">
             <div>
               <div class="flex items-center justify-between gap-2 pb-2">
                 <div class="flex items-center gap-2 flex-wrap text-xs font-semibold">
-                  <span class="px-2.5 py-1 rounded-lg bg-stone-100 text-stone-900 font-mono font-extrabold border border-stone-200">
+                  <span class="px-2.5 py-1 rounded-lg bg-stone-100/90 text-stone-900 font-mono font-extrabold border border-stone-200">
                     <i class="fa-regular fa-clock text-amber-600 mr-1"></i> ${item.time} 抵達
                   </span>
-                  <span class="px-2.5 py-1 rounded-lg bg-stone-100 text-stone-700 border border-stone-200">
+                  <span class="px-2.5 py-1 rounded-lg bg-stone-100/90 text-stone-700 border border-stone-200">
                     <i class="fa-solid fa-hourglass-half text-stone-500 mr-1"></i> 停留約 ${item.duration} 分鐘
                   </span>
                 </div>
@@ -1690,7 +1709,7 @@
                 <h3 class="text-xl font-black text-gray-950 tracking-tight">
                   ${item.title}
                 </h3>
-                <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="text-xs text-amber-900 hover:text-amber-950 hover:underline flex items-center gap-1.5 font-extrabold bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-300 self-start sm:self-auto transition shadow-sm">
+                <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="text-xs text-amber-900 hover:text-amber-950 hover:underline flex items-center gap-1.5 font-extrabold bg-amber-50/90 px-3 py-1.5 rounded-xl border border-amber-200 self-start sm:self-auto transition shadow-xs">
                   <i class="fa-solid fa-location-arrow text-rose-600"></i> 導航路線
                   <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                 </a>
@@ -1701,13 +1720,13 @@
               </p>
 
               ${item.highlights && item.highlights.length > 0 ? `
-                <div class="mt-3.5 bg-stone-50 rounded-2xl p-3.5 border border-stone-200">
+                <div class="mt-3.5 bg-stone-50/80 rounded-2xl p-3.5 border border-stone-200/80">
                   <div class="text-[11px] font-bold text-amber-900 mb-1.5 flex items-center gap-1.5">
                     <i class="fa-solid fa-star text-amber-500 text-xs"></i> 核心看點 / 推薦體驗 (Highlights)：
                   </div>
                   <div class="flex flex-wrap gap-1.5">
                     ${item.highlights.map(h => `
-                      <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-stone-300 text-stone-900 text-xs font-bold shadow-xs">
+                      <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-white border border-stone-200 text-stone-900 text-xs font-bold shadow-xs">
                         <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5"></span>${h}
                       </span>
                     `).join('')}
@@ -1716,7 +1735,7 @@
               ` : ''}
 
               ${item.nearby && item.nearby.length > 0 ? `
-                <div class="mt-3 bg-stone-50 rounded-2xl p-3.5 border border-stone-200">
+                <div class="mt-3 bg-stone-50/80 rounded-2xl p-3.5 border border-stone-200/80">
                   <div class="text-[11px] font-bold text-emerald-900 mb-1 flex items-center gap-1.5">
                     <i class="fa-solid fa-map-location-dot text-emerald-600"></i> 附近順遊推薦景點／彈性備選：
                   </div>
@@ -1739,7 +1758,7 @@
                     <i class="fa-solid fa-book-open-reader text-purple-700"></i> 參考遊記與景點資訊：
                   </span>
                   ${item.articleLinks.map(link => `
-                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 text-[11px] font-bold transition shadow-xs">
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200/80 text-[11px] font-bold transition shadow-xs">
                       ${link.title} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
                     </a>
                   `).join('')}
@@ -1748,7 +1767,7 @@
             </div>
 
             ${item.tip ? `
-              <div class="mt-4 pt-3 border-t border-stone-200 flex items-start gap-2 text-xs text-amber-950 bg-amber-50 px-3.5 py-2.5 rounded-xl border border-amber-300">
+              <div class="mt-4 pt-3 border-t border-stone-200 flex items-start gap-2 text-xs text-amber-950 bg-amber-50/80 px-3.5 py-2.5 rounded-xl border border-amber-200">
                 <i class="fa-solid fa-lightbulb text-amber-600 mt-0.5 flex-shrink-0"></i>
                 <div><strong class="text-amber-900">叮嚀：</strong> ${item.tip}</div>
               </div>
