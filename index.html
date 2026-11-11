@@ -182,7 +182,7 @@
         </div>
         <!-- Slide 3: Classic Red Forest Railway Train through Mountain Woods -->
         <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 ease-in-out bg-cover bg-center"
-             style="background-image: url('https://images.unsplash.com/photo-1508873696983-2df5703bc20d?auto=format&fit=crop&w=2160&q=90');">
+             style="background-image: url('https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=2160&q=90');">
         </div>
         <!-- Slide 4: Real Xiding Sunlit Mountain Tea Terrace & Misty Valley -->
         <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 ease-in-out bg-cover bg-center"
@@ -1191,7 +1191,7 @@
         title: "整裝出發 ➔ 沼平車站搭祝山線觀日小火車",
         type: "transit",
         location: "嘉義縣阿里山鄉沼平車站",
-        image: "https://images.unsplash.com/photo-1508873696983-2df5703bc20d?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
         desc: "住阿里山閣最大優勢！步行 2~3 分鐘直達沼平站，免去大批人潮在遊客中心搶排隊的舟車勞頓。",
         highlights: ["清晨穿妥三層洋蔥式保暖裝備", "保溫瓶裝滿 60°C 熱水隨行", "小火車行駛約 25 分鐘"],
         tip: "清晨氣溫約 1°C~4°C，務必確認毛帽遮住雙耳、防風手套戴妥，小孩每人拿好隨身手電筒。",
@@ -1530,6 +1530,7 @@
         try {
           const decoded = decodeURIComponent(escape(atob(hash)));
           itineraryData = JSON.parse(decoded);
+          repairImages(itineraryData);
           showToast("已載入分享的自訂行程！", "fa-cloud-arrow-down");
           return;
         } catch (e) {
@@ -1541,6 +1542,7 @@
       if (stored) {
         try {
           itineraryData = JSON.parse(stored);
+          repairImages(itineraryData);
           return;
         } catch (e) {
           console.error(e);
@@ -1548,6 +1550,21 @@
       }
 
       itineraryData = JSON.parse(JSON.stringify(defaultItinerary));
+    }
+
+    // 自動檢測並修復快取中舊版失效圖片網址
+    function repairImages(data) {
+      if (!Array.isArray(data)) return;
+      let repaired = false;
+      data.forEach(item => {
+        if (item.image && (item.image.includes("photo-1508873696983") || item.image.trim() === "")) {
+          item.image = "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80";
+          repaired = true;
+        }
+      });
+      if (repaired) {
+        saveState();
+      }
     }
 
     function saveState() {
@@ -1619,7 +1636,7 @@
               src="${imgSrc}" 
               alt="${item.title}" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=800&q=80';"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80';"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:hidden"></div>
             
